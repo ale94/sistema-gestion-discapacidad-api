@@ -28,6 +28,7 @@ public class PersonEntity implements Serializable {
     private String phone;
     private String gender;
     private LocalDate registrationDate;
+    @Enumerated(EnumType.STRING)
     private Status status;
     private String indicatorType;
     private LocalDate consultationDate;
@@ -50,16 +51,12 @@ public class PersonEntity implements Serializable {
     @Builder.Default
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
-            orphanRemoval = true,
-            mappedBy = "person"
-    )
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "person")
     private List<FamilyMemberEntity> familyMembers = new ArrayList<>();
 
     public void addFamilyMembers(List<FamilyMemberEntity> members) {
-        if (members == null) return;
+        if (members == null)
+            return;
         members.forEach(this::addFamilyMember);
     }
 
