@@ -1,24 +1,13 @@
 package ar.com.ale.sistema_discapacidad_api.domain.entities;
 
+import ar.com.ale.sistema_discapacidad_api.util.enums.Status;
+import jakarta.persistence.*;
+import lombok.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-
-import ar.com.ale.sistema_discapacidad_api.util.enums.Status;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity(name = "person")
 @Data
@@ -43,29 +32,44 @@ public class PersonEntity implements Serializable {
     private String indicatorType;
     private LocalDate consultationDate;
 
-    @OneToOne(mappedBy = "person")
+    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
     private EducationEntity education;
 
-    @OneToOne(mappedBy = "person")
+    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
     private WorkEntity work;
 
-    @OneToOne(mappedBy = "person")
+    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
     private HealthEntity health;
 
-    @OneToOne(mappedBy = "person")
+    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
     private AddressEntity address;
 
-    @OneToOne(mappedBy = "person")
+    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
     private BenefitEntity benefit;
 
+    @Builder.Default
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(
-        cascade = CascadeType.ALL, 
-        fetch = FetchType.EAGER, 
-        orphanRemoval = true, 
-        mappedBy = "person"
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true,
+            mappedBy = "person"
     )
-    private List<FamilyMemberEntity> familyMembers;
+    private List<FamilyMemberEntity> familyMembers = new ArrayList<>();
+
+    public void addFamilyMembers(List<FamilyMemberEntity> members) {
+        if (members == null) return;
+        members.forEach(this::addFamilyMember);
+    }
+
+    public void addFamilyMember(FamilyMemberEntity member) {
+        this.familyMembers.add(member);
+        member.setPerson(this);
+    }
+
+    public void deleteFamilyMember(FamilyMemberEntity member) {
+        this.familyMembers.remove(member);
+    }
 
 }
