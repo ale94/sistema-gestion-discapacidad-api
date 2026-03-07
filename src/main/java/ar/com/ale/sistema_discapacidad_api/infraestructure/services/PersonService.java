@@ -1,6 +1,8 @@
 package ar.com.ale.sistema_discapacidad_api.infraestructure.services;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,75 +26,89 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class PersonService implements IPersonService {
 
-        private final PersonRepository personRepository;
-        private final PersonMapper personMapper;
+    private final PersonRepository personRepository;
+    private final PersonMapper personMapper;
 
-        @Override
-        public PersonResponse create(PersonRegisterRequest request) {
+    @Override
+    public PersonResponse create(PersonRegisterRequest request) {
 
-                var address = AddressEntity.builder()
-                                .street(request.getStreet())
-                                .district(request.getDistrict())
-                                .locality(request.getLocality())
-                                .province(request.getProvince())
-                                .build();
+        var address = AddressEntity.builder()
+                .street(request.getStreet())
+                .district(request.getDistrict())
+                .locality(request.getLocality())
+                .province(request.getProvince())
+                .build();
 
-                var education = EducationEntity.builder()
-                                .name(request.getSchoolName())
-                                .address(request.getEducationAddress())
-                                .educationLevel(request.getEducationLevel())
-                                .build();
+        var education = EducationEntity.builder()
+                .name(request.getSchoolName())
+                .address(request.getEducationAddress())
+                .educationLevel(request.getEducationLevel())
+                .build();
 
-                var work = WorkEntity.builder()
-                                .companyName(request.getCompanyName())
-                                .status(request.getEmploymentStatus())
-                                .address(request.getWorkAddress())
-                                .socialWork(request.getSocialWork())
-                                .nameSocialWork(request.getNameSocialWork())
-                                .build();
+        var work = WorkEntity.builder()
+                .companyName(request.getCompanyName())
+                .status(request.getEmploymentStatus())
+                .address(request.getWorkAddress())
+                .socialWork(request.getSocialWork())
+                .nameSocialWork(request.getNameSocialWork())
+                .build();
 
-                var health = HealthEntity.builder()
-                                .cudNumber(request.getCudNumber())
-                                .activeCud(request.getActiveCud())
-                                .rehabilitationTreatment(request.getRehabilitationTreatment())
-                                .diagnostic(request.getDiagnostic())
-                                .disabilityType(request.getDisabilityType())
-                                .build();
+        var health = HealthEntity.builder()
+                .cudNumber(request.getCudNumber())
+                .activeCud(request.getActiveCud())
+                .rehabilitationTreatment(request.getRehabilitationTreatment())
+                .diagnostic(request.getDiagnostic())
+                .disabilityType(request.getDisabilityType())
+                .build();
 
-                var benefit = BenefitEntity.builder()
-                                .federalProgram(request.getFederalProgram())
-                                .pension(request.getPension())
-                                .auh(request.getAuh())
-                                .merchandise(request.getMerchandise())
-                                .freePass(request.getFreePass())
-                                .build();
+        var benefit = BenefitEntity.builder()
+                .federalProgram(request.getFederalProgram())
+                .pension(request.getPension())
+                .auh(request.getAuh())
+                .merchandise(request.getMerchandise())
+                .freePass(request.getFreePass())
+                .build();
 
-                var personToPersist = PersonEntity.builder()
-                                .firstName(request.getFirstName())
-                                .lastName(request.getLastName())
-                                .dni(request.getDni())
-                                .status(Status.registrado)
-                                .civilStatus(request.getCivilStatus())
-                                .dateBirth(request.getDateBirth())
-                                .tutor(request.getTutor())
-                                .phone(request.getPhone())
-                                .gender(request.getGender())
-                                .registrationDate(LocalDate.now())
-                                .address(address)
-                                .education(education)
-                                .work(work)
-                                .health(health)
-                                .benefit(benefit)
-                                .build();
+        var personToPersist = PersonEntity.builder()
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .dni(request.getDni())
+                .status(Status.registrado)
+                .civilStatus(request.getCivilStatus())
+                .dateBirth(request.getDateBirth())
+                .tutor(request.getTutor())
+                .phone(request.getPhone())
+                .gender(request.getGender())
+                .registrationDate(LocalDate.now())
+                .address(address)
+                .education(education)
+                .work(work)
+                .health(health)
+                .benefit(benefit)
+                .build();
 
-                education.setPerson(personToPersist);
-                work.setPerson(personToPersist);
-                health.setPerson(personToPersist);
-                benefit.setPerson(personToPersist);
-                address.setPerson(personToPersist);
+        education.setPerson(personToPersist);
+        work.setPerson(personToPersist);
+        health.setPerson(personToPersist);
+        benefit.setPerson(personToPersist);
+        address.setPerson(personToPersist);
 
-                var personPersisted = this.personRepository.save(personToPersist);
-                return this.personMapper.toResponse(personPersisted);
-        }
+        var personPersisted = this.personRepository.save(personToPersist);
+        return this.personMapper.toResponse(personPersisted);
+    }
+
+    @Override
+    public List<PersonResponse> readAll() {
+        return this.personRepository.findAll()
+                .stream()
+                .map(personMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void delete(Long id) {
+        var personToDelete = this.personRepository.findById(id).orElseThrow();
+        this.personRepository.delete(personToDelete);
+    }
 
 }

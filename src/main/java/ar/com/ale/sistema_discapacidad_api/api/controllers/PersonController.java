@@ -1,7 +1,12 @@
 package ar.com.ale.sistema_discapacidad_api.api.controllers;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +27,17 @@ public class PersonController {
     @PostMapping
     ResponseEntity<PersonResponse> save(@RequestBody PersonRegisterRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.personService.create(request));
+    }
+
+    @GetMapping
+    ResponseEntity<List<PersonResponse>> getAll() {
+        return ResponseEntity.ok(this.personService.readAll());
+    }
+
+    @DeleteMapping("/{id}")
+    ResponseEntity<Void> delete(@PathVariable Long id) {
+        this.personService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
