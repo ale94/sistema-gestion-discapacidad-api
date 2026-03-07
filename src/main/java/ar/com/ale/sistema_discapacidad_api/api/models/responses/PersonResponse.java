@@ -1,9 +1,10 @@
 package ar.com.ale.sistema_discapacidad_api.api.models.responses;
 
 import java.io.Serializable;
-import java.io.ObjectInputFilter.Status;
+
 import java.time.LocalDate;
 
+import ar.com.ale.sistema_discapacidad_api.util.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -2,17 +2,11 @@ package ar.com.ale.sistema_discapacidad_api.infraestructure.services;
 
 import java.time.LocalDate;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.ale.sistema_discapacidad_api.api.models.requests.PersonRegisterRequest;
-import ar.com.ale.sistema_discapacidad_api.api.models.responses.AddressResponse;
-import ar.com.ale.sistema_discapacidad_api.api.models.responses.BenefitResponse;
-import ar.com.ale.sistema_discapacidad_api.api.models.responses.EducationResponse;
-import ar.com.ale.sistema_discapacidad_api.api.models.responses.HealthResponse;
 import ar.com.ale.sistema_discapacidad_api.api.models.responses.PersonResponse;
-import ar.com.ale.sistema_discapacidad_api.api.models.responses.WorkResponse;
 import ar.com.ale.sistema_discapacidad_api.domain.entities.AddressEntity;
 import ar.com.ale.sistema_discapacidad_api.domain.entities.BenefitEntity;
 import ar.com.ale.sistema_discapacidad_api.domain.entities.EducationEntity;
@@ -21,6 +15,7 @@ import ar.com.ale.sistema_discapacidad_api.domain.entities.PersonEntity;
 import ar.com.ale.sistema_discapacidad_api.domain.entities.WorkEntity;
 import ar.com.ale.sistema_discapacidad_api.domain.repositories.PersonRepository;
 import ar.com.ale.sistema_discapacidad_api.infraestructure.abstract_services.IPersonService;
+import ar.com.ale.sistema_discapacidad_api.infraestructure.mappers.PersonMapper;
 import ar.com.ale.sistema_discapacidad_api.util.enums.Status;
 import lombok.RequiredArgsConstructor;
 
@@ -30,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class PersonService implements IPersonService {
 
         private final PersonRepository personRepository;
+        private final PersonMapper personMapper;
 
         @Override
         public PersonResponse create(PersonRegisterRequest request) {
@@ -96,34 +92,7 @@ public class PersonService implements IPersonService {
                 address.setPerson(personToPersist);
 
                 var personPersisted = this.personRepository.save(personToPersist);
-                return this.entityToResponse(personPersisted);
-        }
-
-        private PersonResponse entityToResponse(PersonEntity entity) {
-                var response = new PersonResponse();
-                BeanUtils.copyProperties(entity, response);
-
-                var addressResponse = new AddressResponse();
-                BeanUtils.copyProperties(entity.getAddress(), addressResponse);
-                response.setAddress(addressResponse);
-
-                var educationResponse = new EducationResponse();
-                BeanUtils.copyProperties(entity.getEducation(), educationResponse);
-                response.setEducation(educationResponse);
-
-                var workResponse = new WorkResponse();
-                BeanUtils.copyProperties(entity.getWork(), workResponse);
-                response.setWork(workResponse);
-
-                var healthResponse = new HealthResponse();
-                BeanUtils.copyProperties(entity.getHealth(), healthResponse);
-                response.setHealth(healthResponse);
-
-                var benefitResponse = new BenefitResponse();
-                BeanUtils.copyProperties(entity.getBenefit(), benefitResponse);
-                response.setBenefit(benefitResponse);
-
-                return response;
+                return this.personMapper.toResponse(personPersisted);
         }
 
 }
