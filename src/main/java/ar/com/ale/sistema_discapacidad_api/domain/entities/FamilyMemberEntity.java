@@ -18,7 +18,7 @@ public class FamilyMemberEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String fistName;
+    private String firstName;
     private String lastName;
     private String dni;
     private Integer age;

@@ -2,6 +2,7 @@ package ar.com.ale.sistema_discapacidad_api.domain.entities;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,6 +28,7 @@ public class WorkEntity implements Serializable {
     private String status;
     private String address;
     private Boolean socialWork;
+    @Column(name = "name_social_work")
     private String nameSocialWork;
 
     @OneToOne
