@@ -1,0 +1,43 @@
+POST http://localhost:8080/persons
+content-type: application/json
+
+{
+  "firstName": "dante",
+  "lastName": "gomez",
+  "dni": "11111",
+  "civilStatus": "Soltero",
+  "dateBirth": "1994-06-26",
+  "tutor": "Juan Gomez",
+  "phone": "3886523168",
+  "gender": "Masculino",
+  "street": "Los constituyentes",
+  "district": "San Francisco M.228 L.12",
+  "locality": "Ledesma",
+  "province": "Jujuy",
+  "schoolName": "Raul Galan",
+  "educationAddress": "Av. libertad",
+  "educationLevel": "Primaria",
+  "companyName": "Muni",
+  "employmentStatus": "Empleado",
+  "workAddress": "Belgrano 350",
+  "socialWork": true,
+  "nameSocialWork": "OSDE",
+  "cudNumber": "CUD123456",
+  "activeCud": true,
+  "rehabilitationTreatment": false,
+  "diagnostic": "Trastorno",
+  "disabilityType": "Multiple",
+  "federalProgram": true,
+  "pension": true,
+  "auh": true,
+  "merchandise": false,
+  "freePass": true
+}
+
+
+###
+GET http://localhost:8080/persons
+
+
+###
+DELETE http://localhost:8080/persons/2
