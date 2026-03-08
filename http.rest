@@ -2,9 +2,9 @@ POST http://localhost:8080/persons
 content-type: application/json
 
 {
-  "firstName": "dante",
+  "firstName": "jose",
   "lastName": "gomez",
-  "dni": "11111",
+  "dni": "2222",
   "civilStatus": "Soltero",
   "dateBirth": "1994-06-26",
   "tutor": "Juan Gomez",
@@ -40,4 +40,4 @@ GET http://localhost:8080/persons
 
 
 ###
-DELETE http://localhost:8080/persons/2
+DELETE http://localhost:8080/persons/3
