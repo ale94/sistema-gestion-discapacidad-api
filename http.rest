@@ -2,9 +2,9 @@ POST http://localhost:8080/persons
 content-type: application/json
 
 {
-  "firstName": "jose",
-  "lastName": "gomez",
-  "dni": "2222",
+  "firstName": "Marcos",
+  "lastName": "farfan",
+  "dni": "45652332",
   "civilStatus": "Soltero",
   "dateBirth": "1994-06-26",
   "tutor": "Juan Gomez",
@@ -23,15 +23,15 @@ content-type: application/json
   "socialWork": true,
   "nameSocialWork": "OSDE",
   "cudNumber": "CUD123456",
-  "activeCud": true,
+  "activeCud": false,
   "rehabilitationTreatment": false,
   "diagnostic": "Trastorno",
   "disabilityType": "Multiple",
   "federalProgram": true,
-  "pension": true,
+  "pension": false,
   "auh": true,
   "merchandise": false,
-  "freePass": true
+  "freePass": false
 }
 
 

@@ -11,58 +11,58 @@ INSERT INTO person (
         status
     )
 VALUES (
-        'Juan',
-        'Perez',
+        'juan',
+        'perez',
         '30111222',
-        'SOLTERO',
+        'soltero',
         '1990-05-10',
-        'Maria Perez',
+        'maria perez',
         '3884011111',
-        'MASCULINO',
+        'masculino',
         '2024-01-10',
         'registrado'
     ),
     (
-        'Ramon',
-        'Fernandez',
+        'ramon',
+        'fernandez',
         '12111278',
-        'CASADO',
+        'casado',
         '1993-05-10',
-        'Gaston Perez',
+        'gaston perez',
         '3884011111',
-        'MASCULINO',
+        'masculino',
         '2024-01-10',
         'registrado'
     ),
     (
-        'Juan',
-        'Gomez',
+        'juan',
+        'gomez',
         '45114652',
-        'SOLTERO',
+        'soltero',
         '2000-05-12',
-        'Jorge Perez',
+        'jorge perez',
         '3884011111',
-        'MASCULINO',
+        'masculino',
         '2024-01-10',
         'registrado'
     );
 INSERT INTO education (name, address, education_level, person_id)
 VALUES (
-        'Escuela Belgrano',
+        'escuela belgrano',
         'address',
-        'PRIMARIO',
+        'primario',
         1
     ),
     (
-        'Raul Galan',
-        'Calle falsa',
-        'PRIMARIO',
+        'raul galan',
+        'calle falsa',
+        'primario',
         2
     ),
     (
-        'Comercio 4',
+        'comercio 4',
         'av. pte. peron',
-        'Secundario',
+        'secundario',
         3
     );
 INSERT INTO work (
@@ -74,27 +74,27 @@ INSERT INTO work (
         person_id
     )
 VALUES (
-        'Empresa Ledesma',
-        'ACTIVO',
-        'Av Siempre Viva 123',
+        'empresa ledesma',
+        'activo',
+        'av siempre viva 123',
         true,
-        'OSDE',
+        'osde',
         1
     ),
     (
-        'Muni Ledesma',
-        'ACTIVO',
-        'Av Siempre Viva 123',
+        'muni ledesma',
+        'activo',
+        'av siempre viva 123',
         true,
-        'ISJ',
+        'isj',
         2
     ),
     (
-        'Ejesa',
-        'ACTIVO',
-        'Av libertad',
+        'ejesa',
+        'activo',
+        'av libertad',
         true,
-        'OSPAIL',
+        'ospail',
         3
     );
 INSERT INTO health (
@@ -105,29 +105,29 @@ INSERT INTO health (
         disability_type,
         person_id
     )
-VALUES (true, true, 'CUD1001', 'MOTOR', 'FISICA', 1),
-    (true, true, 'CUD1001', 'MOTOR', 'FISICA', 2),
-    (true, true, 'CUD1001', 'MOTOR', 'FISICA', 3);
+VALUES (true, true, 'cud1001', 'motor', 'fisica', 1),
+    (true, true, 'cud1001', 'motor', 'fisica', 2),
+    (true, true, 'cud1001', 'motor', 'fisica', 3);
 INSERT INTO address (street, district, locality, province, person_id)
 VALUES (
-        'Calle 1',
-        'Barrio Centro',
-        'Libertador',
-        'Jujuy',
+        'calle 1',
+        'barrio centro',
+        'libertador',
+        'jujuy',
         1
     ),
     (
-        'Calle 2',
-        'Barrio Centro',
-        'Libertador',
-        'Jujuy',
+        'calle 2',
+        'barrio centro',
+        'libertador',
+        'jujuy',
         2
     ),
     (
-        'Calle 3',
-        'Barrio Centro',
-        'Libertador',
-        'Jujuy',
+        'calle 3',
+        'barrio centro',
+        'libertador',
+        'jujuy',
         3
     );
 INSERT INTO benefit (
@@ -152,32 +152,32 @@ INSERT INTO family_member (
         person_id
     )
 VALUES (
-        'Maria',
-        'Perez',
+        'maria',
+        'perez',
         '40111111',
         60,
-        'CASADO',
-        'MADRE',
-        'AMA DE CASA',
+        'casado',
+        'madre',
+        'ama de casa',
         1
     ),
     (
-        'Dante',
-        'Gomez',
+        'dante',
+        'gomez',
         '12345678',
         60,
-        'CASADO',
-        'PADRE',
-        'EMPLEADO',
+        'casado',
+        'padre',
+        'empleado',
         2
     ),
     (
-        'Lucas',
-        'Fernandez',
+        'lucas',
+        'fernandez',
         '40111111',
         60,
-        'CASADO',
-        'PRIMO',
-        'Estudiante',
+        'casado',
+        'primo',
+        'estudiante',
         3
     );
