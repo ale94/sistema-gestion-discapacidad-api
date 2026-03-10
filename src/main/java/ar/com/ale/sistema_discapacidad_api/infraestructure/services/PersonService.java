@@ -98,6 +98,57 @@ public class PersonService implements IPersonService {
     }
 
     @Override
+    public PersonResponse update(PersonRegisterRequest request, Long id) {
+        var personToUpdate = this.personRepository.findById(id)
+                .orElseThrow();
+
+        var address = personToUpdate.getAddress();
+        address.setStreet(request.getStreet());
+        address.setDistrict(request.getDistrict());
+        address.setLocality(request.getLocality());
+        address.setProvince(request.getProvince());
+
+        var education = personToUpdate.getEducation();
+        education.setName(request.getSchoolName());
+        education.setAddress(request.getEducationAddress());
+        education.setEducationLevel(request.getEducationLevel());
+
+        var work = personToUpdate.getWork();
+        work.setCompanyName(request.getCompanyName());
+        work.setStatus(request.getEmploymentStatus());
+        work.setAddress(request.getWorkAddress());
+        work.setSocialWork(request.getSocialWork());
+        work.setNameSocialWork(request.getNameSocialWork());
+
+        var health = personToUpdate.getHealth();
+        health.setCudNumber(request.getCudNumber());
+        health.setActiveCud(request.getActiveCud());
+        health.setRehabilitationTreatment(request.getRehabilitationTreatment());
+        health.setDiagnostic(request.getDiagnostic());
+        health.setDisabilityType(request.getDisabilityType());
+
+        var benefit = personToUpdate.getBenefit();
+        benefit.setFederalProgram(request.getFederalProgram());
+        benefit.setPension(request.getPension());
+        benefit.setAuh(request.getAuh());
+        benefit.setMerchandise(request.getMerchandise());
+        benefit.setFreePass(request.getFreePass());
+
+        personToUpdate.setFirstName(request.getFirstName());
+        personToUpdate.setLastName(request.getLastName());
+        personToUpdate.setDni(request.getDni());
+        personToUpdate.setCivilStatus(request.getCivilStatus());
+        personToUpdate.setDateBirth(request.getDateBirth());
+        personToUpdate.setTutor(request.getTutor());
+        personToUpdate.setPhone(request.getPhone());
+        personToUpdate.setGender(request.getGender());
+
+        var personToUpdated = this.personRepository.save(personToUpdate);
+
+        return this.personMapper.toResponse(personToUpdated);
+    }
+
+    @Override
     public List<PersonResponse> readAll() {
         return this.personRepository.findAll()
                 .stream()

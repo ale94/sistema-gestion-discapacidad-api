@@ -11,6 +11,8 @@ public interface IPersonService {
 
     List<PersonResponse> readAll();
 
+    PersonResponse update(PersonRegisterRequest registerRequest, Long id);
+
     void delete(Long id);
 
 }
