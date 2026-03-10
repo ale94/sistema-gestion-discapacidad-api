@@ -3,6 +3,7 @@ package ar.com.ale.sistema_discapacidad_api.api.models.responses;
 import java.io.Serializable;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import ar.com.ale.sistema_discapacidad_api.util.enums.Status;
 import lombok.AllArgsConstructor;
@@ -33,5 +34,7 @@ public class PersonResponse implements Serializable {
     private WorkResponse work;
     private HealthResponse health;
     private BenefitResponse benefit;
+
+    private List<FamilyMemberResponse> familyMembers;
 
 }

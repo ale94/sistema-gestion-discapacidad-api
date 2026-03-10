@@ -2,6 +2,7 @@ package ar.com.ale.sistema_discapacidad_api.api.models.requests;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -54,5 +55,7 @@ public class PersonRegisterRequest implements Serializable {
     private Boolean auh;
     private Boolean merchandise;
     private Boolean freePass;
+
+    private List<FamilyMemberRequest> familyMembers;
 
 }
