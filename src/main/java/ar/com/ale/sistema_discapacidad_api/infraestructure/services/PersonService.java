@@ -89,14 +89,16 @@ public class PersonService implements IPersonService {
 				.benefit(benefit)
 				.build();
 
-		personToPersist.setFamilyMembers(request.getFamilyMembers()
-				.stream()
-				.map(familyMemberRequest -> {
-					var familyMember = familyMapper.toEntity(familyMemberRequest);
-					familyMember.setPerson(personToPersist);
-					return familyMember;
-				})
-				.toList());
+		if (request.getFamilyMembers() != null) {
+			personToPersist.setFamilyMembers(request.getFamilyMembers()
+					.stream()
+					.map(familyMemberRequest -> {
+						var familyMember = familyMapper.toEntity(familyMemberRequest);
+						familyMember.setPerson(personToPersist);
+						return familyMember;
+					})
+					.toList());
+		}
 
 		education.setPerson(personToPersist);
 		work.setPerson(personToPersist);

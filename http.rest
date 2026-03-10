@@ -4,7 +4,7 @@ content-type: application/json
 {
   "firstName": "Marcos",
   "lastName": "farfan",
-  "dni": "45652332",
+  "dni": "1232312312",
   "civilStatus": "Soltero",
   "dateBirth": "1994-06-26",
   "tutor": "Juan Gomez",
