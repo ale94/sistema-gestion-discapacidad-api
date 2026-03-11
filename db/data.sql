@@ -8,10 +8,11 @@ INSERT INTO person (
         phone,
         gender,
         registration_date,
-        status
+        status,
+        indicator_type
     )
 VALUES (
-        'juan',
+        'lucas',
         'perez',
         '30111222',
         'soltero',
@@ -20,7 +21,8 @@ VALUES (
         '3884011111',
         'masculino',
         '2024-01-10',
-        'registrado'
+        'registrado',
+        'nada'
     ),
     (
         'ramon',
@@ -32,7 +34,8 @@ VALUES (
         '3884011111',
         'masculino',
         '2024-01-10',
-        'registrado'
+        'registrado',
+        'nada'
     ),
     (
         'juan',
@@ -44,8 +47,35 @@ VALUES (
         '3884011111',
         'masculino',
         '2024-01-10',
-        'registrado'
-    );
+        'registrado',
+        'nada'
+    ),
+       (
+           'gaston',
+           'pereyra',
+           '15659456',
+           'soltero',
+           '2000-05-12',
+           'jorge perez',
+           '3884011111',
+           'masculino',
+           '2024-01-10',
+           'en_seguimiento',
+           'Grado de Discapacidad: Niveles de 0 a 4 (desde sin discapacidad h.'
+       ),
+       (
+           'franco',
+           'torres',
+           '45789456',
+           'soltero',
+           '2000-05-12',
+           'jorge perez',
+           '3884011111',
+           'masculino',
+           '2024-01-10',
+           'en_seguimiento',
+           'Grado de Dependencia: Medición de la autonomía en actividades de la.'
+       );
 INSERT INTO education (name, address, education_level, person_id)
 VALUES (
         'escuela belgrano',
@@ -96,6 +126,22 @@ VALUES (
         true,
         'ospail',
         3
+    ),
+(
+    'work2',
+    'activo',
+    'av 12312',
+    true,
+    'adasd',
+    4
+),
+(
+        'loss',
+        'activo',
+        'av sadsad',
+        true,
+        'dasdsa',
+        5
     );
 INSERT INTO health (
         active_cud,
@@ -129,7 +175,21 @@ VALUES (
         'libertador',
         'jujuy',
         3
-    );
+    ),
+       (
+           'calle 4',
+           'barrio centro',
+           'libertador',
+           'jujuy',
+           4
+       ),
+       (
+           'calle 5',
+           'barrio centro',
+           'libertador',
+           'jujuy',
+           5
+       )
 INSERT INTO benefit (
         pension,
         free_pass,
