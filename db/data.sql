@@ -49,33 +49,8 @@ VALUES (
         '2024-01-10',
         'registrado',
         'nada'
-    ),
-       (
-           'gaston',
-           'pereyra',
-           '15659456',
-           'soltero',
-           '2000-05-12',
-           'jorge perez',
-           '3884011111',
-           'masculino',
-           '2024-01-10',
-           'en_seguimiento',
-           'Grado de Discapacidad: Niveles de 0 a 4 (desde sin discapacidad h.'
-       ),
-       (
-           'franco',
-           'torres',
-           '45789456',
-           'soltero',
-           '2000-05-12',
-           'jorge perez',
-           '3884011111',
-           'masculino',
-           '2024-01-10',
-           'en_seguimiento',
-           'Grado de Dependencia: Medición de la autonomía en actividades de la.'
-       );
+    );
+
 INSERT INTO education (name, address, education_level, person_id)
 VALUES (
         'escuela belgrano',
@@ -159,21 +134,7 @@ VALUES (
         'libertador',
         'jujuy',
         3
-    ),
-       (
-           'calle 4',
-           'barrio centro',
-           'libertador',
-           'jujuy',
-           4
-       ),
-       (
-           'calle 5',
-           'barrio centro',
-           'libertador',
-           'jujuy',
-           5
-       );
+    );
 INSERT INTO benefit (
         pension,
         free_pass,
