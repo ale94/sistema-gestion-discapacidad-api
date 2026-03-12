@@ -10,7 +10,6 @@ import ar.com.ale.sistema_discapacidad_api.domain.entities.PersonEntity;
 @Mapper(componentModel = "spring")
 public interface PersonMapper {
 
-    @BeanMapping(ignoreByDefault = true)
     PersonEntity toEntity(PersonRegisterRequest request);
 
     PersonResponse toResponse(PersonEntity entity);

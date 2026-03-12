@@ -126,22 +126,6 @@ VALUES (
         true,
         'ospail',
         3
-    ),
-(
-    'work2',
-    'activo',
-    'av 12312',
-    true,
-    'adasd',
-    4
-),
-(
-        'loss',
-        'activo',
-        'av sadsad',
-        true,
-        'dasdsa',
-        5
     );
 INSERT INTO health (
         active_cud,
@@ -189,7 +173,7 @@ VALUES (
            'libertador',
            'jujuy',
            5
-       )
+       );
 INSERT INTO benefit (
         pension,
         free_pass,

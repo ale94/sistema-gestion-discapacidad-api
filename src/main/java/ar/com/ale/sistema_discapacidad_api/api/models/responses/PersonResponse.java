@@ -28,6 +28,7 @@ public class PersonResponse implements Serializable {
     private String gender;
     private LocalDate registrationDate;
     private Status status;
+    private String indicatorType;
 
     private EducationResponse education;
     private AddressResponse address;

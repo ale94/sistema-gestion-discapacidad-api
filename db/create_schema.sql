@@ -96,3 +96,12 @@ CREATE TABLE family_member (
         REFERENCES person(id)
         ON DELETE CASCADE
 );
+CREATE TABLE person_tracking (
+    id BIGSERIAL PRIMARY KEY,
+    last_name VARCHAR(100),
+    first_name VARCHAR(100),
+    dni VARCHAR(20) UNIQUE,
+    indicator_type VARCHAR(200),
+    address VARCHAR(100),
+    phone VARCHAR(100)
+);
