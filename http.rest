@@ -41,3 +41,20 @@ GET http://localhost:8080/persons
 
 ###
 DELETE http://localhost:8080/persons/3
+
+
+###
+GET http://localhost:8080/events
+
+
+###
+POST http://localhost:8080/events
+content-type: application/json
+
+{
+  "name": "Presentacion test 2",
+  "type": "Presentacion",
+  "date": "2026-04-02",
+  "description": "Evento sobre desarrollo de software",
+  "attendees": 12
+}
