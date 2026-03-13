@@ -20,7 +20,6 @@ public interface PersonMapper {
     @Mapping(target = "benefit", ignore = true)
     PersonEntity toEntity(PersonRegisterRequest request);
 
-    @Mapping(target = "id", ignore = true)
     PersonResponse toResponse(PersonEntity entity);
 
 }

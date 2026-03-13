@@ -180,7 +180,7 @@ VALUES (
 INSERT INTO event (name, type, date, description, attendees)
 VALUES (
         'Reunión de equipo',
-        'Trabajo',
+        'Taller',
         '2026-03-15',
         'Reunión para planificación del proyecto',
         10
@@ -188,7 +188,7 @@ VALUES (
 INSERT INTO event (name, type, date, description, attendees)
 VALUES (
         'Conferencia de Tecnología',
-        'Conferencia',
+        'Charla',
         '2026-04-02',
         'Evento sobre desarrollo de software',
         120
@@ -196,7 +196,7 @@ VALUES (
 INSERT INTO event (name, type, date, description, attendees)
 VALUES (
         'Taller de Programación',
-        'Educativo',
+        'Taller',
         '2026-04-10',
         'Taller práctico de Java y Spring Boot',
         25
