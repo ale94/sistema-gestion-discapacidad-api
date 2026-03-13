@@ -42,7 +42,6 @@ VALUES (
         'masculino',
         '2025-01-10'
     );
-
 INSERT INTO education (name, address, education_level, person_id)
 VALUES (
         'escuela belgrano',
@@ -177,4 +176,28 @@ VALUES (
         'primo',
         'estudiante',
         3
+    );
+INSERT INTO event (name, type, date, description, attendees)
+VALUES (
+        'Reunión de equipo',
+        'Trabajo',
+        '2026-03-15',
+        'Reunión para planificación del proyecto',
+        10
+    );
+INSERT INTO event (name, type, date, description, attendees)
+VALUES (
+        'Conferencia de Tecnología',
+        'Conferencia',
+        '2026-04-02',
+        'Evento sobre desarrollo de software',
+        120
+    );
+INSERT INTO event (name, type, date, description, attendees)
+VALUES (
+        'Taller de Programación',
+        'Educativo',
+        '2026-04-10',
+        'Taller práctico de Java y Spring Boot',
+        25
     );

@@ -102,3 +102,12 @@ CREATE TABLE person_tracking (
     address VARCHAR(100),
     phone VARCHAR(100)
 );
+
+CREATE TABLE event (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    type VARCHAR(50),
+    date DATE,
+    description TEXT,
+    attendees INTEGER
+);
