@@ -1,6 +1,5 @@
 package ar.com.ale.sistema_discapacidad_api.domain.entities;
 
-import ar.com.ale.sistema_discapacidad_api.util.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,10 +27,6 @@ public class PersonEntity implements Serializable {
     private String phone;
     private String gender;
     private LocalDate registrationDate;
-    @Enumerated(EnumType.STRING)
-    private Status status;
-    private String indicatorType;
-    private LocalDate consultationDate;
 
     @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
     private EducationEntity education;

@@ -1,11 +1,9 @@
 package ar.com.ale.sistema_discapacidad_api.api.models.responses;
 
 import java.io.Serializable;
-
 import java.time.LocalDate;
 import java.util.List;
 
-import ar.com.ale.sistema_discapacidad_api.util.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,8 +25,6 @@ public class PersonResponse implements Serializable {
     private String phone;
     private String gender;
     private LocalDate registrationDate;
-    private Status status;
-    private String indicatorType;
 
     private EducationResponse education;
     private AddressResponse address;

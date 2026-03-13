@@ -1,6 +1,5 @@
 package ar.com.ale.sistema_discapacidad_api.infraestructure.mappers;
 
-import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 
 import ar.com.ale.sistema_discapacidad_api.api.models.requests.PersonRegisterRequest;

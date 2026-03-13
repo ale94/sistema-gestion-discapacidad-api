@@ -7,9 +7,7 @@ INSERT INTO person (
         tutor,
         phone,
         gender,
-        registration_date,
-        status,
-        indicator_type
+        registration_date
     )
 VALUES (
         'lucas',
@@ -20,9 +18,7 @@ VALUES (
         'maria perez',
         '3884011111',
         'masculino',
-        '2024-01-10',
-        'registrado',
-        'nada'
+        '2023-01-10'
     ),
     (
         'ramon',
@@ -33,9 +29,7 @@ VALUES (
         'gaston perez',
         '3884011111',
         'masculino',
-        '2024-01-10',
-        'registrado',
-        'nada'
+        '2024-01-10'
     ),
     (
         'juan',
@@ -46,9 +40,7 @@ VALUES (
         'jorge perez',
         '3884011111',
         'masculino',
-        '2024-01-10',
-        'registrado',
-        'nada'
+        '2025-01-10'
     );
 
 INSERT INTO education (name, address, education_level, person_id)

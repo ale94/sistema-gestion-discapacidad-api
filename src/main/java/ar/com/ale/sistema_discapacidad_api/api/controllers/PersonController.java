@@ -2,7 +2,6 @@ package ar.com.ale.sistema_discapacidad_api.api.controllers;
 
 import java.util.List;
 
-import ar.com.ale.sistema_discapacidad_api.api.models.requests.PersonTrackingRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

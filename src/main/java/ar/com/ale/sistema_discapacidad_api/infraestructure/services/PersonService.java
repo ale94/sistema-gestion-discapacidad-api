@@ -19,7 +19,6 @@ import ar.com.ale.sistema_discapacidad_api.domain.repositories.PersonRepository;
 import ar.com.ale.sistema_discapacidad_api.infraestructure.abstract_services.IPersonService;
 import ar.com.ale.sistema_discapacidad_api.infraestructure.mappers.FamilyMapper;
 import ar.com.ale.sistema_discapacidad_api.infraestructure.mappers.PersonMapper;
-import ar.com.ale.sistema_discapacidad_api.util.enums.Status;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -75,7 +74,6 @@ public class PersonService implements IPersonService {
 				.firstName(request.getFirstName())
 				.lastName(request.getLastName())
 				.dni(request.getDni())
-				.status(Status.registrado)
 				.civilStatus(request.getCivilStatus())
 				.dateBirth(request.getDateBirth())
 				.tutor(request.getTutor())

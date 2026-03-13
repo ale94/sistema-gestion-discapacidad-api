@@ -12,10 +12,7 @@ CREATE TABLE person (
     tutor VARCHAR(100),
     phone VARCHAR(100),
     gender VARCHAR(100),
-    registration_date DATE,
-    status VARCHAR(100),
-    indicator_type VARCHAR(250),
-    consultation_date DATE
+    registration_date DATE
 );
 -- =========================
 -- EDUCATION
