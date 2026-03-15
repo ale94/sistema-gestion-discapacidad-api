@@ -1,38 +1,38 @@
 package ar.com.ale.sistema_discapacidad_api.domain.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.time.LocalDate;
 
-import jakarta.persistence.CascadeType;
+import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-@Entity(name = "equipment_type")
+@Entity(name = "equipment")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class EquipmentTypeEntity implements Serializable {
+public class EquipmentEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
+    private String code;
+    private Integer totalStock;
+    private String status;
+    private LocalDate createdAt;
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "equipmentType")
-    private List<EquipmentEntity> equipments;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "equipment_type_id")
+    private EquipmentTypeEntity equipmentType;
 
 }
