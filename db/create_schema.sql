@@ -1,4 +1,3 @@
-
 -- =========================
 -- PERSON
 -- =========================
@@ -76,7 +75,9 @@ CREATE TABLE benefit (
     person_id BIGINT UNIQUE,
     CONSTRAINT fk_benefit_person FOREIGN KEY (person_id) REFERENCES person(id) ON DELETE CASCADE
 );
-
+-- =========================
+-- FAMILY MEMBER
+-- =========================
 CREATE TABLE family_member (
     id BIGSERIAL PRIMARY KEY,
     first_name VARCHAR(100),
@@ -86,13 +87,12 @@ CREATE TABLE family_member (
     civil_status VARCHAR(100),
     parentage VARCHAR(100),
     occupation VARCHAR(100),
-
     person_id BIGINT,
-    CONSTRAINT fk_family_member_person
-        FOREIGN KEY (person_id)
-        REFERENCES person(id)
-        ON DELETE CASCADE
+    CONSTRAINT fk_family_member_person FOREIGN KEY (person_id) REFERENCES person(id) ON DELETE CASCADE
 );
+-- =========================
+-- PERSON TRACKING
+-- =========================
 CREATE TABLE person_tracking (
     id BIGSERIAL PRIMARY KEY,
     last_name VARCHAR(100),
@@ -102,7 +102,9 @@ CREATE TABLE person_tracking (
     address VARCHAR(100),
     phone VARCHAR(100)
 );
-
+-- =========================
+-- EVENT
+-- =========================
 CREATE TABLE event (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -110,4 +112,24 @@ CREATE TABLE event (
     date DATE,
     description TEXT,
     attendees INTEGER
+);
+-- =========================
+-- EQUIPMENT TYPE
+-- =========================
+CREATE TABLE equipment_type (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description TEXT
+);
+-- =========================
+-- EQUIPMENT
+-- =========================
+CREATE TABLE equipment (
+    id BIGSERIAL PRIMARY KEY,
+    code VARCHAR(50) NOT NULL,
+    total_stock INTEGER NOT NULL,
+    status VARCHAR(50),
+    created_at DATE,
+    equipment_type_id BIGINT,
+    CONSTRAINT fk_equipment_type FOREIGN KEY (equipment_type_id) REFERENCES equipment_type(id)
 );
