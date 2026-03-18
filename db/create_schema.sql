@@ -133,3 +133,19 @@ CREATE TABLE equipment (
     equipment_type_id BIGINT,
     CONSTRAINT fk_equipment_type FOREIGN KEY (equipment_type_id) REFERENCES equipment_type(id)
 );
+-- =========================
+-- LOAN
+-- =========================
+CREATE TABLE loan (
+                      id BIGSERIAL PRIMARY KEY,
+                      type VARCHAR(100),
+                      equipment_number VARCHAR(100),
+                      dni VARCHAR(50),
+                      applicant VARCHAR(150),
+                      address VARCHAR(200),
+                      phone VARCHAR(50),
+                      year VARCHAR(4),
+                      request_date DATE,
+                      expiration DATE,
+                      return_date DATE
+);
