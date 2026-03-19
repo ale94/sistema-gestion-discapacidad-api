@@ -11,6 +11,7 @@ import ar.com.ale.sistema_discapacidad_api.domain.entities.EquipmentTypeEntity;
 public interface EquipmentTypeMapper {
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "equipments", ignore = true)
     EquipmentTypeEntity toEntity(EquipmentTypeRequest request);
 
     EquipmentTypeResponse toResponse(EquipmentTypeEntity entity);
