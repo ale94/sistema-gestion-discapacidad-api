@@ -2,36 +2,58 @@ POST http://localhost:8080/persons
 content-type: application/json
 
 {
-  "firstName": "Marcos",
-  "lastName": "farfan",
-  "dni": "1232312312",
-  "civilStatus": "Soltero",
-  "dateBirth": "1994-06-26",
-  "tutor": "Juan Gomez",
-  "phone": "3886523168",
-  "gender": "Masculino",
-  "street": "Los constituyentes",
-  "district": "San Francisco M.228 L.12",
-  "locality": "Ledesma",
-  "province": "Jujuy",
-  "schoolName": "Raul Galan",
-  "educationAddress": "Av. libertad",
-  "educationLevel": "Primaria",
-  "companyName": "Muni",
-  "employmentStatus": "Empleado",
-  "workAddress": "Belgrano 350",
-  "socialWork": true,
-  "nameSocialWork": "OSDE",
-  "cudNumber": "CUD123456",
-  "activeCud": false,
-  "rehabilitationTreatment": false,
-  "diagnostic": "Trastorno",
-  "disabilityType": "Multiple",
-  "federalProgram": true,
-  "pension": false,
-  "auh": true,
-  "merchandise": false,
-  "freePass": false
+  "firstName": "test",
+  "lastName": "test",
+  "dni": "12345678",
+  "civilStatus": "soltero",
+  "dateBirth": "1990-05-10",
+  "tutor": "maria perez",
+  "phone": "3884011111",
+  "gender": "masculino",
+  "registrationDate": "2023-01-10",
+  "education": {
+    "name": "escuela belgrano 2",
+    "address": "address",
+    "educationLevel": "primario"
+  },
+  "address": {
+    "street": "calle 1 2",
+    "district": "barrio centro",
+    "locality": "libertador",
+    "province": "jujuy"
+  },
+  "work": {
+    "companyName": "empresa ledesma 2",
+    "status": "activo",
+    "address": "av siempre viva 123",
+    "socialWork": true,
+    "nameSocialWork": "osde"
+  },
+  "health": {
+    "cudNumber": "cud1001 2",
+    "activeCud": true,
+    "rehabilitationTreatment": true,
+    "diagnostic": "motor",
+    "disabilityType": "fisica"
+  },
+  "benefit": {
+    "federalProgram": true,
+    "pension": true,
+    "auh": true,
+    "merchandise": true,
+    "freePass": true
+  },
+  "familyMembers": [
+    {
+      "firstName": "maria2",
+      "lastName": "perez2",
+      "dni": "40111111",
+      "age": 60,
+      "civilStatus": "casado",
+      "parentage": "madre",
+      "occupation": "ama de casa"
+    }
+  ]
 }
 
 

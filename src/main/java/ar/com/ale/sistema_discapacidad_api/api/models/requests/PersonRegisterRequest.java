@@ -24,37 +24,11 @@ public class PersonRegisterRequest implements Serializable {
     private String phone;
     private String gender;
 
-    // Address fields
-    private String street;
-    private String district;
-    private String locality;
-    private String province;
-
-    // Education fields
-    private String schoolName;
-    private String educationAddress;
-    private String educationLevel;
-
-    // Work fields
-    private String companyName;
-    private String employmentStatus;
-    private String workAddress;
-    private Boolean socialWork;
-    private String nameSocialWork;
-
-    // Health fields
-    private String cudNumber;
-    private Boolean activeCud;
-    private Boolean rehabilitationTreatment;
-    private String diagnostic;
-    private String disabilityType;
-
-    // Benefit fields
-    private Boolean federalProgram;
-    private Boolean pension;
-    private Boolean auh;
-    private Boolean merchandise;
-    private Boolean freePass;
+    private AddressRequest address;
+    private EducationRequest education;
+    private WorkRequest work;
+    private HealthRequest health;
+    private BenefitRequest benefit;
 
     private List<FamilyMemberRequest> familyMembers;
 
