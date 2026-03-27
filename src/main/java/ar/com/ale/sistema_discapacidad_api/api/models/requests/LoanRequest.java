@@ -15,10 +15,10 @@ import java.time.LocalDate;
 public class LoanRequest implements Serializable {
     private String type;
     private String equipmentNumber;
-    private String dni;
+    private Long dni;
     private String applicant;
     private String address;
-    private String phone;
+    private Long phone;
     private LocalDate expiration;
     private LocalDate returnDate;
 }

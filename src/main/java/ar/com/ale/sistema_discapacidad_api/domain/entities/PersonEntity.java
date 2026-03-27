@@ -20,11 +20,11 @@ public class PersonEntity implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;
-    private String dni;
+    private Long dni;
     private String civilStatus;
     private LocalDate dateBirth;
     private String tutor;
-    private String phone;
+    private Long phone;
     private String gender;
     private LocalDate registrationDate;
 

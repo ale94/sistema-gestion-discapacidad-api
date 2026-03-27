@@ -15,7 +15,7 @@ public class FamilyMemberRequest implements Serializable {
 
     private String firstName;
     private String lastName;
-    private String dni;
+    private Long dni;
     private Integer age;
     private String civilStatus;
     private String parentage;

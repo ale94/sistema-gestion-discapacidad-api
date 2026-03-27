@@ -5,11 +5,11 @@ CREATE TABLE person (
     id BIGSERIAL PRIMARY KEY,
     first_name VARCHAR(100),
     last_name VARCHAR(100),
-    dni VARCHAR(20) UNIQUE,
+    dni BIGSERIAL UNIQUE,
     civil_status VARCHAR(50),
     date_birth DATE,
     tutor VARCHAR(100),
-    phone VARCHAR(100),
+    phone BIGSERIAL,
     gender VARCHAR(100),
     registration_date DATE
 );
@@ -82,7 +82,7 @@ CREATE TABLE family_member (
     id BIGSERIAL PRIMARY KEY,
     first_name VARCHAR(100),
     last_name VARCHAR(100),
-    dni VARCHAR(50),
+    dni BIGSERIAL,
     age INTEGER,
     civil_status VARCHAR(100),
     parentage VARCHAR(100),
@@ -97,10 +97,10 @@ CREATE TABLE person_tracking (
     id BIGSERIAL PRIMARY KEY,
     last_name VARCHAR(100),
     first_name VARCHAR(100),
-    dni VARCHAR(20) UNIQUE,
+    dni BIGSERIAL UNIQUE,
     indicator_type VARCHAR(200),
     address VARCHAR(100),
-    phone VARCHAR(100)
+    phone BIGSERIAL
 );
 -- =========================
 -- EVENT
@@ -140,10 +140,10 @@ CREATE TABLE loan (
                       id BIGSERIAL PRIMARY KEY,
                       type VARCHAR(100),
                       equipment_number VARCHAR(100),
-                      dni VARCHAR(50),
+                      dni BIGSERIAL,
                       applicant VARCHAR(150),
                       address VARCHAR(200),
-                      phone VARCHAR(50),
+                      phone BIGSERIAL,
                       year VARCHAR(4),
                       request_date DATE,
                       expiration DATE,

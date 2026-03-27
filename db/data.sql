@@ -12,33 +12,33 @@ INSERT INTO person (
 VALUES (
         'lucas',
         'perez',
-        '30111222',
+        30111222,
         'soltero',
         '1990-05-10',
         'maria perez',
-        '3884011111',
+        3884011111,
         'masculino',
         '2023-01-10'
     ),
     (
         'ramon',
         'fernandez',
-        '12111278',
+        12111278,
         'casado',
         '1993-05-10',
         'gaston perez',
-        '3884011111',
+        3884011111,
         'masculino',
         '2024-01-10'
     ),
     (
         'juan',
         'gomez',
-        '45114652',
+        45114652,
         'soltero',
         '2000-05-12',
         'jorge perez',
-        '3884011111',
+        3884011111,
         'masculino',
         '2025-01-10'
     );
@@ -150,7 +150,7 @@ INSERT INTO family_member (
 VALUES (
         'maria',
         'perez',
-        '40111111',
+        40111111,
         60,
         'casado',
         'madre',
@@ -160,7 +160,7 @@ VALUES (
     (
         'dante',
         'gomez',
-        '12345678',
+        12345678,
         60,
         'casado',
         'padre',
@@ -170,7 +170,7 @@ VALUES (
     (
         'lucas',
         'fernandez',
-        '40111111',
+        40111111,
         60,
         'casado',
         'primo',

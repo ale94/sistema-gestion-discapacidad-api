@@ -62,7 +62,7 @@ GET http://localhost:8080/persons
 
 
 ###
-DELETE http://localhost:8080/persons/3
+DELETE http://localhost:8080/persons/1
 
 
 ###

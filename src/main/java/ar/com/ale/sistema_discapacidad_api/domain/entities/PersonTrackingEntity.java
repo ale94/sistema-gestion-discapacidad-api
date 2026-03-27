@@ -22,8 +22,8 @@ public class PersonTrackingEntity implements Serializable {
     private Long id;
     private String lastName;
     private String firstName;
-    private String dni;
+    private Long dni;
     private String indicatorType;
     private String address;
-    private String phone;
+    private Long phone;
 }

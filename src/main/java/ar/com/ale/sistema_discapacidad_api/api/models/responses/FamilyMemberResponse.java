@@ -16,7 +16,7 @@ public class FamilyMemberResponse implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;
-    private String dni;
+    private Long dni;
     private Integer age;
     private String civilStatus;
     private String parentage;
