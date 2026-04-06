@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @RequiredArgsConstructor
-
 public class PersonTrackingService implements IPersonTrackingService {
 
     private final PersonTrackingRepository personTrackingRepository;
