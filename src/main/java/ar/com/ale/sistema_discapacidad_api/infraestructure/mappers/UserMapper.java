@@ -10,6 +10,7 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "active", ignore = true)
     UserEntity toEntity(UserRequest request);
 
     UserResponse toResponse(UserEntity entity);

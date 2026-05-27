@@ -87,12 +87,6 @@ public class PersonService implements IPersonService {
 		var personToUpdate = this.personRepository.findById(id)
 				.orElseThrow();
 
-		var address = this.addressMapper.toEntity(request.getAddress());
-		var work = this.workMapper.toEntity(request.getWork());
-		var education = this.educationMapper.toEntity(request.getEducation());
-		var health = this.healthMapper.toEntity(request.getHealth());
-		var benefit = this.benefitMapper.toEntity(request.getBenefit());
-
 		personToUpdate.getFamilyMembers().clear();
 
 		request.getFamilyMembers()
@@ -100,11 +94,38 @@ public class PersonService implements IPersonService {
 				.map(familyMapper::toEntity)
 				.forEach(personToUpdate::addFamilyMember);
 
-		personToUpdate.setAddress(address);
-		personToUpdate.setWork(work);
-		personToUpdate.setEducation(education);
-		personToUpdate.setHealth(health);
-		personToUpdate.setBenefit(benefit);
+		var address = personToUpdate.getAddress();
+		address.setStreet(request.getAddress().getStreet());
+		address.setDistrict(request.getAddress().getDistrict());
+		address.setLocality(request.getAddress().getLocality());
+		address.setProvince(request.getAddress().getProvince());
+
+		var work = personToUpdate.getWork();
+		work.setCompanyName(request.getWork().getCompanyName());
+		work.setStatus(request.getWork().getStatus());
+		work.setAddress(request.getWork().getAddress());
+		work.setSocialWork(request.getWork().getSocialWork());
+		work.setNameSocialWork(request.getWork().getNameSocialWork());
+
+		var education = personToUpdate.getEducation();
+		education.setName(request.getEducation().getName());
+		education.setAddress(request.getEducation().getAddress());
+		education.setEducationLevel(request.getEducation().getEducationLevel());
+
+		var health = personToUpdate.getHealth();
+		health.setCudNumber(request.getHealth().getCudNumber());
+		health.setActiveCud(request.getHealth().getActiveCud());
+		health.setRehabilitationTreatment(request.getHealth().getRehabilitationTreatment());
+		health.setDiagnostic(request.getHealth().getDiagnostic());
+		health.setDisabilityType(request.getHealth().getDisabilityType());
+
+		var benefit = personToUpdate.getBenefit();
+		benefit.setFederalProgram(request.getBenefit().getFederalProgram());
+		benefit.setPension(request.getBenefit().getPension());
+		benefit.setAuh(request.getBenefit().getAuh());
+		benefit.setMerchandise(request.getBenefit().getMerchandise());
+		benefit.setFreePass(request.getBenefit().getFreePass());
+
 		personToUpdate.setFirstName(request.getFirstName());
 		personToUpdate.setLastName(request.getLastName());
 		personToUpdate.setDni(request.getDni());
