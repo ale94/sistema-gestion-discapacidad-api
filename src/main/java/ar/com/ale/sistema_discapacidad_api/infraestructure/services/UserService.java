@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import java.util.List;
 
 @Service
@@ -20,12 +22,15 @@ public class UserService implements IUserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public UserResponse create(UserRequest request) {
         var userToPersist = UserEntity.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
-                .password(request.getPassword())
+                .userName(request.getUserName())
+                .password(passwordEncoder.encode(request.getPassword()))
                 .dni(request.getDni())
                 .role(request.getRole())
                 .active(true)
@@ -47,7 +52,9 @@ public class UserService implements IUserService {
         var userToUpdate = this.userRepository.findById(id).orElseThrow();
         userToUpdate.setFirstName(request.getFirstName());
         userToUpdate.setLastName(request.getLastName());
-        userToUpdate.setPassword(request.getPassword());
+        if (request.getPassword() != null && !request.getPassword().isBlank()) {
+            userToUpdate.setPassword(passwordEncoder.encode(request.getPassword()));
+        }
         userToUpdate.setDni(request.getDni());
         userToUpdate.setRole(request.getRole());
         var userUpdated = userRepository.save(userToUpdate);
