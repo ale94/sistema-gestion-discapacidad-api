@@ -170,6 +170,7 @@ CREATE TABLE users
     id         BIGSERIAL PRIMARY KEY,
     first_name VARCHAR(100),
     last_name  VARCHAR(100),
+    user_name  VARCHAR(100),
     password   VARCHAR(255),
     dni        BIGINT UNIQUE,
     role       VARCHAR(50),

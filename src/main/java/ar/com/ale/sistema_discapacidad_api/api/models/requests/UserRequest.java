@@ -14,6 +14,7 @@ import java.io.Serializable;
 public class UserRequest implements Serializable {
     private String firstName;
     private String lastName;
+    private String userName;
     private String password;
     private Long dni;
     private String role;
