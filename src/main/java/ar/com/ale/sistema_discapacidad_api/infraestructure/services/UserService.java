@@ -29,7 +29,7 @@ public class UserService implements IUserService {
         var userToPersist = UserEntity.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
-                .userName(request.getUserName())
+                .userName(request.getDni())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .dni(request.getDni())
                 .role(request.getRole())
