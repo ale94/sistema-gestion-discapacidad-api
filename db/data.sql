@@ -13,7 +13,7 @@ VALUES (
         'Velasquez',
         '34091232',
         crypt('admin', gen_salt('bf', 7)),
-        '34.091.232',
+        34091232,
         'ADMIN',
         TRUE
     ),
@@ -22,7 +22,7 @@ VALUES (
         'Gutiérrez',
         '33183555',
         crypt('1234', gen_salt('bf', 7)),
-        '33.183.555',
+        33183555,
         'USER',
         TRUE
     ),
@@ -31,7 +31,7 @@ VALUES (
         'Zambrano',
         '41902113',
         crypt('1234', gen_salt('bf', 7)),
-        '41.902.113',
+        41902113,
         'USER',
         TRUE
     ),
@@ -40,7 +40,7 @@ VALUES (
         'Cerpa',
         '39201327',
         crypt('1234', gen_salt('bf', 7)),
-        '39.201.327',
+        39201327,
         'USER',
         TRUE
     );
