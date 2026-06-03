@@ -1,3 +1,50 @@
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+INSERT INTO users (
+        first_name,
+        last_name,
+        user_name,
+        password,
+        dni,
+        role,
+        active
+    )
+VALUES (
+        'Maria Eugenia',
+        'Velasquez',
+        '34091232',
+        crypt('admin', gen_salt('bf', 7)),
+        '34.091.232',
+        'ADMIN',
+        TRUE
+    ),
+    (
+        'Celeste Licia',
+        'Gutiérrez',
+        '33183555',
+        crypt('1234', gen_salt('bf', 7)),
+        '33.183.555',
+        'USER',
+        TRUE
+    ),
+    (
+        'Tamara Zoe',
+        'Zambrano',
+        '41902113',
+        crypt('1234', gen_salt('bf', 7)),
+        '41.902.113',
+        'USER',
+        TRUE
+    ),
+    (
+        'Fernanda Antonella',
+        'Cerpa',
+        '39201327',
+        crypt('1234', gen_salt('bf', 7)),
+        '39.201.327',
+        'USER',
+        TRUE
+    );
+    
 -- INSERT INTO person (
 --         first_name,
 --         last_name,

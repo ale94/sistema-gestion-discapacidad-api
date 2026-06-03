@@ -172,7 +172,7 @@ CREATE TABLE users
     last_name  VARCHAR(100),
     user_name  VARCHAR(100),
     password   VARCHAR(255),
-    dni        BIGINT UNIQUE,
+    dni        VARCHAR(100),
     role       VARCHAR(50),
     active     BOOLEAN
 );
