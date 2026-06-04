@@ -49,6 +49,14 @@ public class PersonEntity implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "person")
     private List<FamilyMemberEntity> familyMembers = new ArrayList<>();
 
+    @Builder.Default
+    @OneToMany(
+            mappedBy = "person",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<FreePassEntity> freePasses = new ArrayList<>();
+
     public void addFamilyMembers(List<FamilyMemberEntity> members) {
         if (members == null)
             return;
@@ -63,5 +71,4 @@ public class PersonEntity implements Serializable {
     public void deleteFamilyMember(FamilyMemberEntity member) {
         this.familyMembers.remove(member);
     }
-
 }

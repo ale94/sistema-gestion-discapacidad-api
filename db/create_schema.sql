@@ -176,3 +176,31 @@ CREATE TABLE users
     role       VARCHAR(50),
     active     BOOLEAN
 );
+
+-- =========================
+-- FREE PASS
+-- =========================
+CREATE TABLE free_pass (
+    id BIGSERIAL PRIMARY KEY,
+    type VARCHAR(50) NOT NULL,          -- Mapea FreePassType (Enum STRING)
+    start_date DATE NOT NULL,           
+    reason VARCHAR(255),                
+    active BOOLEAN DEFAULT TRUE,        
+    status VARCHAR(50) NOT NULL,        -- Mapea FreePassStatus (Enum STRING)
+    person_id BIGINT NOT NULL,          
+    
+    CONSTRAINT fk_free_pass_person FOREIGN KEY (person_id) REFERENCES person(id) ON DELETE CASCADE
+
+);
+
+-- =========================
+-- FREE PASS RENEWAL
+-- =========================
+CREATE TABLE free_pass_renewal (
+    id BIGSERIAL PRIMARY KEY,
+    year INT NOT NULL,                  -- Mapea Integer
+    renewal_date DATE NOT NULL,         -- Mapea LocalDate
+    free_pass_id BIGINT NOT NULL,       -- Relación @ManyToOne con FreePassEntity
+    
+    CONSTRAINT fk_renewal_free_pass FOREIGN KEY (free_pass_id) REFERENCES free_pass(id) ON DELETE CASCADE
+);
