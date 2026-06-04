@@ -2,9 +2,13 @@ package ar.com.ale.sistema_discapacidad_api.api.controllers;
 
 import ar.com.ale.sistema_discapacidad_api.api.models.requests.FreePassRenewalRequest;
 import ar.com.ale.sistema_discapacidad_api.api.models.responses.FreePassRenewalResponse;
-import ar.com.ale.sistema_discapacidad_api.infraestructure.services.FreePassRenewalService;
+import ar.com.ale.sistema_discapacidad_api.infraestructure.abstract_services.IFreePassRenewalService;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,14 +16,16 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class FreePassRenewalController {
 
-    private final FreePassRenewalService service;
+    private final IFreePassRenewalService renewalService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public FreePassRenewalResponse create(
-            @RequestBody
-            FreePassRenewalRequest request
-    ) {
-        return service.create(request);
+    public FreePassRenewalResponse create( @RequestBody FreePassRenewalRequest request ) {
+        return this.renewalService.create(request);
+    }
+
+    @GetMapping
+    ResponseEntity<List<FreePassRenewalResponse>> getAll() {
+        return ResponseEntity.ok(this.renewalService.readAll());
     }
 }

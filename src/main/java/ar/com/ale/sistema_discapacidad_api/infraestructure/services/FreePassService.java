@@ -8,6 +8,7 @@ import ar.com.ale.sistema_discapacidad_api.domain.entities.PersonEntity;
 import ar.com.ale.sistema_discapacidad_api.domain.enums.FreePassStatus;
 import ar.com.ale.sistema_discapacidad_api.domain.repositories.FreePassRepository;
 import ar.com.ale.sistema_discapacidad_api.domain.repositories.PersonRepository;
+import ar.com.ale.sistema_discapacidad_api.infraestructure.abstract_services.IFreePassService;
 import ar.com.ale.sistema_discapacidad_api.infraestructure.mappers.FreePassMapper;
 import lombok.RequiredArgsConstructor;
 
@@ -21,12 +22,13 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class FreePassService {
+public class FreePassService implements IFreePassService{
 
     private final FreePassRepository freePassRepository;
     private final PersonRepository personRepository;
     private final FreePassMapper freePassMapper;
 
+    @Override
     public FreePassResponse create(FreePassRequest request) {
 
         PersonEntity person = personRepository.findById(
@@ -73,7 +75,8 @@ public class FreePassService {
         return mapToResponse(saved);
     }
 
-    public List<FreePassResponse> getAll() {
+    @Override
+    public List<FreePassResponse> readAll() {
 
         return freePassRepository.findAll()
                 .stream()
@@ -81,6 +84,7 @@ public class FreePassService {
                 .toList();
     }
 
+    @Override
     public FreePassResponse getById(Long id) {
 
         FreePassEntity freePass =
@@ -92,9 +96,8 @@ public class FreePassService {
         return mapToResponse(freePass);
     }
 
-    public FreePassResponse update(
-                Long id,
-                FreePassRequest request) {
+    @Override
+    public FreePassResponse update(FreePassRequest request, Long id) {
 
         FreePassEntity freePass =
                 freePassRepository.findById(id)
@@ -112,6 +115,7 @@ public class FreePassService {
         return freePassMapper.toResponse(updated);
         }
 
+    @Override
     public FreePassResponse updateStatus(
                 Long id,
                 FreePassStatusRequest request) {
@@ -130,6 +134,7 @@ public class FreePassService {
         return freePassMapper.toResponse(updated);
     }
 
+    @Override
     public void delete(Long id) {
 
         FreePassEntity freePass =

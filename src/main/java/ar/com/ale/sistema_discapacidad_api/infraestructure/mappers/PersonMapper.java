@@ -18,6 +18,8 @@ public interface PersonMapper {
     @Mapping(target = "health", ignore = true)
     @Mapping(target = "address", ignore = true)
     @Mapping(target = "benefit", ignore = true)
+    @Mapping(target = "freePasses", ignore = true)
+    
     PersonEntity toEntity(PersonRegisterRequest request);
 
     PersonResponse toResponse(PersonEntity entity);

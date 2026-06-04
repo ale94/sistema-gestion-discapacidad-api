@@ -8,15 +8,12 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface FreePassMapper {
 
-    @Mapping(
-            target = "personId",
-            source = "person.id"
-    )
-    @Mapping(
-            target = "fullName",
+    @Mapping( target = "personId", source = "person.id" )
+    @Mapping( target = "fullName",
             expression =
-            "java(entity.getPerson().getLastName() + \", \" + entity.getPerson().getFirstName())"
+                "java(entity.getPerson().getLastName() + \", \" + entity.getPerson().getFirstName())"
     )
+    @Mapping( target = "renewals", ignore = true)
     FreePassResponse toResponse(
             FreePassEntity entity
     );

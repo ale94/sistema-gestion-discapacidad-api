@@ -3,7 +3,7 @@ package ar.com.ale.sistema_discapacidad_api.api.controllers;
 import ar.com.ale.sistema_discapacidad_api.api.models.requests.FreePassRequest;
 import ar.com.ale.sistema_discapacidad_api.api.models.requests.FreePassStatusRequest;
 import ar.com.ale.sistema_discapacidad_api.api.models.responses.FreePassResponse;
-import ar.com.ale.sistema_discapacidad_api.infraestructure.services.FreePassService;
+import ar.com.ale.sistema_discapacidad_api.infraestructure.abstract_services.IFreePassService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FreePassController {
 
-    private final FreePassService freePassService;
+    private final IFreePassService freePassService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -28,7 +28,7 @@ public class FreePassController {
     @GetMapping
     public List<FreePassResponse> getAll() {
 
-        return freePassService.getAll();
+        return freePassService.readAll();
     }
 
     @GetMapping("/{id}")
@@ -43,7 +43,7 @@ public class FreePassController {
             @PathVariable Long id,
             @RequestBody FreePassRequest request) {
 
-        return freePassService.update(id, request);
+        return freePassService.update(request, id);
     }
 
     @PatchMapping("/{id}/status")
