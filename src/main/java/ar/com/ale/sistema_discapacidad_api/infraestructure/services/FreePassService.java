@@ -60,7 +60,6 @@ public class FreePassService implements IFreePassService{
                 .person(person)
                 .type(request.getType())
                 .reason(request.getReason())
-                .startDate(request.getStartDate())
                 .status(
                         request.getStatus() != null
                                 ? request.getStatus()
@@ -72,16 +71,16 @@ public class FreePassService implements IFreePassService{
         FreePassEntity saved =
                 freePassRepository.save(freePass);
 
-        return mapToResponse(saved);
+        return freePassMapper.toResponse(saved);
     }
 
     @Override
     public List<FreePassResponse> readAll() {
 
         return freePassRepository.findAll()
-                .stream()
-                .map(this::mapToResponse)
-                .toList();
+            .stream()
+            .map(freePassMapper::toResponse)
+            .toList();
     }
 
     @Override
@@ -93,7 +92,7 @@ public class FreePassService implements IFreePassService{
                                 new RuntimeException(
                                         "Pase libre no encontrado"));
 
-        return mapToResponse(freePass);
+        return freePassMapper.toResponse(freePass);
     }
 
     @Override
@@ -107,7 +106,6 @@ public class FreePassService implements IFreePassService{
 
         freePass.setReason(request.getReason());
         freePass.setType(request.getType());
-        freePass.setStartDate(request.getStartDate());
 
         FreePassEntity updated =
                 freePassRepository.save(freePass);
@@ -144,23 +142,5 @@ public class FreePassService implements IFreePassService{
                                         "Pase libre no encontrado"));
 
         freePassRepository.delete(freePass);
-    }
-
-    private FreePassResponse mapToResponse(
-            FreePassEntity entity) {
-
-        return FreePassResponse.builder()
-                .id(entity.getId())
-                .personId(entity.getPerson().getId())
-                .fullName(
-                        entity.getPerson().getLastName()
-                                + ", "
-                                + entity.getPerson().getFirstName()
-                )
-                .type(entity.getType())
-                .reason(entity.getReason())
-                .startDate(entity.getStartDate())
-                .active(entity.getActive())
-                .build();
     }
 }

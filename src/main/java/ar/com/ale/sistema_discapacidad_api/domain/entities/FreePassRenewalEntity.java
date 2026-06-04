@@ -5,8 +5,21 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity(name = "free_pass_renewal")
+@Table(
+    uniqueConstraints = {
+        @UniqueConstraint(
+            name = "uk_free_pass_year",
+            columnNames = {"free_pass_id", "year"}
+        )
+    }
+)
+@EntityListeners(AuditingEntityListener.class)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,4 +37,8 @@ public class FreePassRenewalEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "free_pass_id")
     private FreePassEntity freePass;
+
+    @CreatedDate
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 }

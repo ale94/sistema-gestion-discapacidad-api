@@ -28,4 +28,9 @@ public class FreePassRenewalController {
     ResponseEntity<List<FreePassRenewalResponse>> getAll() {
         return ResponseEntity.ok(this.renewalService.readAll());
     }
+
+    @GetMapping("/free-pass/{freePassId}")
+    public List<FreePassRenewalResponse> getByFreePassId(@PathVariable Long freePassId) {
+        return this.renewalService.readByFreePassId(freePassId);
+    }
 }

@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface IFreePassRenewalService {
 
-    FreePassRenewalResponse create(
-            FreePassRenewalRequest request
-    );
+    FreePassRenewalResponse create(FreePassRenewalRequest request);
 
     List<FreePassRenewalResponse> readAll();
+
+    List<FreePassRenewalResponse> readByFreePassId(Long freePassId);
 }

@@ -5,7 +5,7 @@ import ar.com.ale.sistema_discapacidad_api.domain.entities.FreePassEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = FreePassRenewalMapper.class)
 public interface FreePassMapper {
 
     @Mapping( target = "personId", source = "person.id" )
@@ -13,7 +13,7 @@ public interface FreePassMapper {
             expression =
                 "java(entity.getPerson().getLastName() + \", \" + entity.getPerson().getFirstName())"
     )
-    @Mapping( target = "renewals", ignore = true)
+    
     FreePassResponse toResponse(
             FreePassEntity entity
     );

@@ -4,8 +4,6 @@ import ar.com.ale.sistema_discapacidad_api.domain.enums.FreePassType;
 import ar.com.ale.sistema_discapacidad_api.domain.enums.FreePassStatus;
 import lombok.Data;
 
-import java.time.LocalDate;
-
 @Data
 public class FreePassRequest {
 
@@ -14,8 +12,6 @@ public class FreePassRequest {
     private FreePassType type;
 
     private String reason;
-
-    private LocalDate startDate;
 
     private FreePassStatus status;
 }
