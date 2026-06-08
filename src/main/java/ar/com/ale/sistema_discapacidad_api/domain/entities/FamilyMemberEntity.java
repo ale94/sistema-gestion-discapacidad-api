@@ -1,6 +1,7 @@
 package ar.com.ale.sistema_discapacidad_api.domain.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,13 +19,11 @@ public class FamilyMemberEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private Long dni;
-    private Integer age;
-    private String civilStatus;
+    private LocalDate dateBirth;
+    private Long phone;
     private String parentage;
-    private String occupation;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id")

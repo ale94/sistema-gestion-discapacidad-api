@@ -1,6 +1,7 @@
 package ar.com.ale.sistema_discapacidad_api.api.models.requests;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,11 +14,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class FamilyMemberRequest implements Serializable {
 
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private Long dni;
-    private Integer age;
-    private String civilStatus;
+    private LocalDate dateBirth;
+    private Long phone;
     private String parentage;
-    private String occupation;
+   
 }

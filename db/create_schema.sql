@@ -87,13 +87,11 @@ CREATE TABLE benefit
 CREATE TABLE family_member
 (
     id           BIGSERIAL PRIMARY KEY,
-    first_name   VARCHAR(100),
-    last_name    VARCHAR(100),
+    full_name    VARCHAR(100),
     dni          BIGINT,
-    age          INTEGER,
-    civil_status VARCHAR(100),
+    date_birth   DATE,
+    phone        BIGSERIAL,
     parentage    VARCHAR(100),
-    occupation   VARCHAR(100),
     person_id    BIGINT,
     CONSTRAINT fk_family_member_person FOREIGN KEY (person_id) REFERENCES person (id) ON DELETE CASCADE
 );
