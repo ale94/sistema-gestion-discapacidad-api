@@ -4,9 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -14,33 +13,30 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import ar.com.ale.sistema_discapacidad_api.domain.enums.FreePassStatus;
 
-@Entity(name = "free_pass")
+@Entity(name = "national_free_pass")
 @EntityListeners(AuditingEntityListener.class)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class FreePassEntity implements Serializable {
-
+public class NationalFreePassEntity implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String reason;
-
-    private Boolean active;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id")
     private PersonEntity person;
 
-    @Builder.Default
-    @OneToMany(
-            mappedBy = "freePass",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<FreePassRenewalEntity> renewals = new ArrayList<>();
+    private LocalDate tripDate;
+
+    private Integer ticketQuantity;
+
+    private String origin;
+
+    private String destination;
+
+    private String reason;
 
     @Enumerated(EnumType.STRING)
     private FreePassStatus status;

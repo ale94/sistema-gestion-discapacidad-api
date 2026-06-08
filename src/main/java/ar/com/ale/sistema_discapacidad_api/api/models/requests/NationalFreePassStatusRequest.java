@@ -4,11 +4,7 @@ import ar.com.ale.sistema_discapacidad_api.domain.enums.FreePassStatus;
 import lombok.Data;
 
 @Data
-public class FreePassRequest {
-
-    private Long personId;
-
-    private String reason;
+public class NationalFreePassStatusRequest {
 
     private FreePassStatus status;
 }
