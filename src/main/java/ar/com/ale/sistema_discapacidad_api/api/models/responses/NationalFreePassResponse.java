@@ -4,8 +4,8 @@ import ar.com.ale.sistema_discapacidad_api.domain.enums.FreePassStatus;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -13,17 +13,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "id",
     "personId",
     "fullName",
-    "reason",
-    "startDate",
-    "active",
-    "renewals",
+    "tripDate",
+    "ticketQuantity",
+    "origin",
+    "destination",
     "status",
+    "reason",
     "createdAt",
     "updatedAt"
 })
 @Data
 @Builder
-public class FreePassResponse {
+public class NationalFreePassResponse {
 
     private Long id;
 
@@ -31,11 +32,15 @@ public class FreePassResponse {
 
     private String fullName;
 
+    private LocalDate tripDate;
+
+    private Integer ticketQuantity;
+
+    private String origin;
+
+    private String destination;
+
     private String reason;
-
-    private Boolean active;
-
-    private List<FreePassRenewalResponse> renewals;
 
     private FreePassStatus status;
 

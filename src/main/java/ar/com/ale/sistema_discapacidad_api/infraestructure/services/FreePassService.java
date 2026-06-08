@@ -34,31 +34,26 @@ public class FreePassService implements IFreePassService{
         PersonEntity person = personRepository.findById(
                 request.getPersonId()
         ).orElseThrow(() ->
-                new RuntimeException("Persona no encontrada"));
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Persona no encontrada"
+        ));
 
-        if (person.getHealth() == null ||
-                !Boolean.TRUE.equals(person.getHealth().getActiveCud())) {
-
-            throw new RuntimeException(
-                    "La persona no posee CUD vigente");
+        if (person.getHealth() == null || !Boolean.TRUE.equals(person.getHealth().getActiveCud())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"La persona no posee un CUD vigente");
         }
 
         boolean exists = freePassRepository
-                .existsByPersonIdAndType(
-                        request.getPersonId(),
-                        request.getType()
+                .existsByPersonId(
+                        request.getPersonId()
                 );
 
         if(exists){
-                throw new ResponseStatusException(
-                        HttpStatus.CONFLICT,
-                        "La persona ya posee un pase libre de este tipo"
+                throw new ResponseStatusException(HttpStatus.CONFLICT,
+                "La persona ya posee un pase libre provincial"
                 );
         }
 
         FreePassEntity freePass = FreePassEntity.builder()
                 .person(person)
-                .type(request.getType())
                 .reason(request.getReason())
                 .status(
                         request.getStatus() != null
@@ -89,8 +84,9 @@ public class FreePassService implements IFreePassService{
         FreePassEntity freePass =
                 freePassRepository.findById(id)
                         .orElseThrow(() ->
-                                new RuntimeException(
-                                        "Pase libre no encontrado"));
+                                new ResponseStatusException(HttpStatus.NOT_FOUND,
+                                "Pase libre no encontrado"
+                        ));
 
         return freePassMapper.toResponse(freePass);
     }
@@ -101,11 +97,11 @@ public class FreePassService implements IFreePassService{
         FreePassEntity freePass =
                 freePassRepository.findById(id)
                         .orElseThrow(() ->
-                                new RuntimeException(
-                                        "Pase libre no encontrado"));
+                                new ResponseStatusException(HttpStatus.NOT_FOUND,
+                                        "Pase libre no encontrado"
+                        ));
 
         freePass.setReason(request.getReason());
-        freePass.setType(request.getType());
 
         FreePassEntity updated =
                 freePassRepository.save(freePass);
@@ -121,8 +117,13 @@ public class FreePassService implements IFreePassService{
         FreePassEntity freePass = freePassRepository
                 .findById(id)
                 .orElseThrow(() ->
-                        new RuntimeException(
-                                "Pase libre no encontrado"));
+                        new ResponseStatusException(HttpStatus.NOT_FOUND,
+                                "Pase libre no encontrado"
+                        ));
+
+        if (request.getStatus() == null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Debe indicar un estado");
+        }
 
         freePass.setStatus(request.getStatus());
 
@@ -138,8 +139,9 @@ public class FreePassService implements IFreePassService{
         FreePassEntity freePass =
                 freePassRepository.findById(id)
                         .orElseThrow(() ->
-                                new RuntimeException(
-                                        "Pase libre no encontrado"));
+                                new ResponseStatusException(HttpStatus.NOT_FOUND,
+                                        "Pase libre no encontrado"
+                        ));
 
         freePassRepository.delete(freePass);
     }
