@@ -48,4 +48,9 @@ public class PersonController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/dni/{dni}")
+    ResponseEntity<PersonResponse> getByDni(@PathVariable Long dni) {
+        return ResponseEntity.ok(this.personService.findByDni(dni));
+    }
+
 }

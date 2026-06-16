@@ -154,4 +154,11 @@ public class PersonService implements IPersonService {
 		this.personRepository.delete(personToDelete);
 	}
 
+	@Override
+	public PersonResponse findByDni(Long dni) {
+		var person = this.personRepository.findByDni(dni)
+				.orElseThrow(() -> new RuntimeException("Persona no encontrada con DNI: " + dni));
+		return this.personMapper.toResponse(person);
+	}
+
 }

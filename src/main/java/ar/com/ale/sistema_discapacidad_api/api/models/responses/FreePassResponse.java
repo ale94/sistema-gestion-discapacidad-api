@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "id",
     "personId",
+    "dni",
     "fullName",
     "reason",
     "startDate",
@@ -28,6 +29,8 @@ public class FreePassResponse {
     private Long id;
 
     private Long personId;
+
+    private Long dni;
 
     private String fullName;
 

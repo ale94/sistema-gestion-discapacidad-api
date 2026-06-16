@@ -9,6 +9,7 @@ import org.mapstruct.Mapping;
 public interface FreePassMapper {
 
     @Mapping( target = "personId", source = "person.id" )
+    @Mapping( target = "dni", source = "person.dni" )
     @Mapping( target = "fullName",
             expression =
                 "java(entity.getPerson().getLastName() + \", \" + entity.getPerson().getFirstName())"
