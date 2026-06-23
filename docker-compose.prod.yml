@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+
+  sql-db:
+
+    image: postgres:15.2
+
+    container_name: disability_system
+
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: ${SPRING_DATASOURCE_DB}
+      POSTGRES_USER: ${SPRING_DATASOURCE_USERNAME}
+      POSTGRES_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+
+    # Seguridad máxima: Bloquea accesos externos directos a la base de datos
+    ports:
+      - "127.0.0.1:5432:5432"
+
+    # Guarda la información en un volumen real del disco duro del servidor
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

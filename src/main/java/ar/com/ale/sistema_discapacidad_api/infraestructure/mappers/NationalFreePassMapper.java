@@ -13,6 +13,10 @@ public interface NationalFreePassMapper {
             source = "person.id"
     )
     @Mapping(
+            target = "dni",
+            source = "person.dni"
+    )
+    @Mapping(
             target = "fullName",
             expression =
             "java(entity.getPerson().getLastName() + \", \" + entity.getPerson().getFirstName())"
