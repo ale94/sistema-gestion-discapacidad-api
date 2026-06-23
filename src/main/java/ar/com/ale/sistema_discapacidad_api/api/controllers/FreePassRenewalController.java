@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/free-pass-renewals")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200")
 public class FreePassRenewalController {
 
     private final IFreePassRenewalService renewalService;

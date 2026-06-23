@@ -19,7 +19,8 @@ public interface PersonMapper {
     @Mapping(target = "address", ignore = true)
     @Mapping(target = "benefit", ignore = true)
     @Mapping(target = "freePasses", ignore = true)
-    
+    @Mapping(target = "nationalFreePasses", ignore = true)
+      
     PersonEntity toEntity(PersonRegisterRequest request);
 
     PersonResponse toResponse(PersonEntity entity);

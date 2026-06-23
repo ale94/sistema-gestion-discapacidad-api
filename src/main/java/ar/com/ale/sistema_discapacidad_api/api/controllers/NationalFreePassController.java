@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/national-free-passes")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200")
 public class NationalFreePassController {
 
     private final INationalFreePassService service;
