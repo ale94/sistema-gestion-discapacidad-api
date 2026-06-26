@@ -27,6 +27,11 @@ public class PersonTrackingController {
         return ResponseEntity.ok(this.personTrackingService.readAll());
     }
 
+    @GetMapping("/{id}")
+    ResponseEntity<PersonTrackingResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(this.personTrackingService.getById(id));
+    }
+
     @PutMapping("/{id}")
     ResponseEntity<PersonTrackingResponse> update(@RequestBody PersonTrackingRequest request, @PathVariable Long id) {
         return ResponseEntity.ok(this.personTrackingService.update(request, id));

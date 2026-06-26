@@ -35,6 +35,11 @@ public class PersonController {
         return ResponseEntity.ok(this.personService.readAll());
     }
 
+    @GetMapping("/{id}")
+    ResponseEntity<PersonResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(this.personService.getById(id));
+    }
+
     @PutMapping("/{id}")
     ResponseEntity<PersonResponse> update(@RequestBody PersonRegisterRequest request, @PathVariable Long id) {
         return ResponseEntity.ok(this.personService.update(request, id));

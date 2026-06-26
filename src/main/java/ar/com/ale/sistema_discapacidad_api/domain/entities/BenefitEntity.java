@@ -1,7 +1,9 @@
 package ar.com.ale.sistema_discapacidad_api.domain.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,6 +30,9 @@ public class BenefitEntity implements Serializable {
     private Boolean auh;
     private Boolean merchandise;
     private Boolean freePass;
+
+    @Column(name = "free_pass_expiration")
+    private LocalDate freePassExpiration;
 
     @OneToOne
     @JoinColumn(name = "person_id")

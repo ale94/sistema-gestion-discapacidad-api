@@ -41,6 +41,12 @@ public class LoanService implements ILoanService {
     }
 
     @Override
+    public LoanResponse getById(Long id) {
+        var loan = this.loanRepository.findById(id).orElseThrow();
+        return this.loanMapper.toResponse(loan);
+    }
+
+    @Override
     public List<LoanResponse> readAll() {
         return this.loanRepository.findAll()
                 .stream()
@@ -57,6 +63,7 @@ public class LoanService implements ILoanService {
         loanToUpdate.setApplicant(request.getApplicant());
         loanToUpdate.setAddress(request.getAddress());
         loanToUpdate.setPhone(request.getPhone());
+        loanToUpdate.setExpiration(request.getExpiration());
         loanToUpdate.setReturnDate(request.getReturnDate());
         var loanUpdated = this.loanRepository.save(loanToUpdate);
         return this.loanMapper.toResponse(loanUpdated);

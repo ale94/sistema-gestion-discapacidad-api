@@ -32,6 +32,12 @@ public class EquipmentTypeService implements IEquipmentTypeService {
     }
 
     @Override
+    public EquipmentTypeResponse getById(Long id) {
+        var equipmentType = this.equipmentTypeRepository.findById(id).orElseThrow();
+        return this.equipmentTypeMapper.toResponse(equipmentType);
+    }
+
+    @Override
     public List<EquipmentTypeResponse> readAll() {
         return this.equipmentTypeRepository.findAll().stream()
                 .map(this.equipmentTypeMapper::toResponse)

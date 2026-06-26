@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -54,6 +55,8 @@ public class FreePassService implements IFreePassService{
 
         FreePassEntity freePass = FreePassEntity.builder()
                 .person(person)
+                .type(request.getType() != null ? request.getType() : "PROVINCIAL")
+                .startDate(request.getStartDate() != null ? request.getStartDate() : LocalDate.now())
                 .reason(request.getReason())
                 .status(
                         request.getStatus() != null
@@ -62,6 +65,11 @@ public class FreePassService implements IFreePassService{
                         )
                 .active(true)
                 .build();
+
+        if (request.getFreePassExpiration() != null && person.getBenefit() != null) {
+            person.getBenefit().setFreePassExpiration(request.getFreePassExpiration());
+            personRepository.save(person);
+        }
 
         FreePassEntity saved =
                 freePassRepository.save(freePass);
@@ -102,6 +110,14 @@ public class FreePassService implements IFreePassService{
                         ));
 
         freePass.setReason(request.getReason());
+
+        if (request.getStatus() != null) {
+            freePass.setStatus(request.getStatus());
+        }
+
+        if (request.getActive() != null) {
+            freePass.setActive(request.getActive());
+        }
 
         FreePassEntity updated =
                 freePassRepository.save(freePass);

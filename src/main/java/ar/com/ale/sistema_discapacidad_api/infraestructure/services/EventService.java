@@ -36,6 +36,12 @@ public class EventService implements IEventService {
     }
 
     @Override
+    public EventResponse getById(Long id) {
+        var event = this.eventRepository.findById(id).orElseThrow();
+        return this.eventMapper.toResponse(event);
+    }
+
+    @Override
     public List<EventResponse> readAll() {
         return this.eventRepository.findAll()
                 .stream()

@@ -51,6 +51,11 @@ public class NationalFreePassService
             );
         }
 
+        if (request.getFreePassExpiration() != null && person.getBenefit() != null) {
+            person.getBenefit().setFreePassExpiration(request.getFreePassExpiration());
+            personRepository.save(person);
+        }
+
         NationalFreePassEntity pass =
                 NationalFreePassEntity.builder()
                         .person(person)

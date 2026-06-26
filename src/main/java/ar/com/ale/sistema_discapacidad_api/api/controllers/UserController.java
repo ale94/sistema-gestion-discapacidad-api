@@ -27,6 +27,11 @@ public class UserController {
         return ResponseEntity.ok(this.userService.readAll());
     }
 
+    @GetMapping("/{id}")
+    ResponseEntity<UserResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(this.userService.getById(id));
+    }
+
     @PutMapping("/{id}")
     ResponseEntity<UserResponse> update(@RequestBody UserRequest request, @PathVariable Long id) {
         return ResponseEntity.ok(this.userService.update(request, id));

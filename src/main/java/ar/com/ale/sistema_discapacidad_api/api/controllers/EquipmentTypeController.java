@@ -35,6 +35,11 @@ public class EquipmentTypeController {
         return ResponseEntity.ok(this.equipmentTypeService.readAll());
     }
 
+    @GetMapping("/{id}")
+    ResponseEntity<EquipmentTypeResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(this.equipmentTypeService.getById(id));
+    }
+
     @PutMapping("/{id}")
     ResponseEntity<EquipmentTypeResponse> update(@RequestBody EquipmentTypeRequest request, @PathVariable Long id) {
         return ResponseEntity.ok(this.equipmentTypeService.update(request, id));

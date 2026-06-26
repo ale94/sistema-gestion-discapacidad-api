@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class EquipmentRequest implements Serializable {
 
     private Integer totalStock;
-    private String idEquipmentType;
+    private Long idEquipmentType;
     private String status;
 
 }

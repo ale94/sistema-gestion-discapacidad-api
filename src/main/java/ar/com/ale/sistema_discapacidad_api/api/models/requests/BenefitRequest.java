@@ -1,6 +1,7 @@
 package ar.com.ale.sistema_discapacidad_api.api.models.requests;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,5 +19,6 @@ public class BenefitRequest implements Serializable {
     private Boolean auh;
     private Boolean merchandise;
     private Boolean freePass;
+    private LocalDate freePassExpiration;
 
 }

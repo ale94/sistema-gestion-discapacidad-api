@@ -22,4 +22,6 @@ public class NationalFreePassRequest {
     private FreePassStatus status;
 
     private String reason;
+
+    private LocalDate freePassExpiration;
 }

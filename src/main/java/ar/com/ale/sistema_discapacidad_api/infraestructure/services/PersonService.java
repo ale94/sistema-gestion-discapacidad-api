@@ -124,9 +124,10 @@ public class PersonService implements IPersonService {
 		benefit.setPension(request.getBenefit().getPension());
 		benefit.setAuh(request.getBenefit().getAuh());
 		benefit.setMerchandise(request.getBenefit().getMerchandise());
-		benefit.setFreePass(request.getBenefit().getFreePass());
+        benefit.setFreePass(request.getBenefit().getFreePass());
+        benefit.setFreePassExpiration(request.getBenefit().getFreePassExpiration());
 
-		personToUpdate.setFirstName(request.getFirstName());
+        personToUpdate.setFirstName(request.getFirstName());
 		personToUpdate.setLastName(request.getLastName());
 		personToUpdate.setDni(request.getDni());
 		personToUpdate.setCivilStatus(request.getCivilStatus());
@@ -154,8 +155,14 @@ public class PersonService implements IPersonService {
 		this.personRepository.delete(personToDelete);
 	}
 
-	@Override
-	public PersonResponse findByDni(Long dni) {
+    @Override
+    public PersonResponse getById(Long id) {
+        var person = this.personRepository.findById(id).orElseThrow();
+        return this.personMapper.toResponse(person);
+    }
+
+    @Override
+    public PersonResponse findByDni(Long dni) {
 		var person = this.personRepository.findByDni(dni)
 				.orElseThrow(() -> new RuntimeException("Persona no encontrada con DNI: " + dni));
 		return this.personMapper.toResponse(person);

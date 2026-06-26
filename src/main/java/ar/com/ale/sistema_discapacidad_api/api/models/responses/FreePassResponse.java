@@ -4,6 +4,7 @@ import ar.com.ale.sistema_discapacidad_api.domain.enums.FreePassStatus;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -35,6 +36,8 @@ public class FreePassResponse {
     private String fullName;
 
     private String reason;
+
+    private LocalDate startDate;
 
     private Boolean active;
 

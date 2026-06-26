@@ -4,5 +4,5 @@ import ar.com.ale.sistema_discapacidad_api.api.models.requests.EquipmentTypeRequ
 import ar.com.ale.sistema_discapacidad_api.api.models.responses.EquipmentTypeResponse;
 
 public interface IEquipmentTypeService extends CrudService<EquipmentTypeRequest, EquipmentTypeResponse, Long> {
-
+    EquipmentTypeResponse getById(Long id);
 }

@@ -35,6 +35,11 @@ public class LoanController {
         return ResponseEntity.ok(this.loanService.readAll());
     }
 
+    @GetMapping("/{id}")
+    ResponseEntity<LoanResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(this.loanService.getById(id));
+    }
+
     @PutMapping("/{id}")
     ResponseEntity<LoanResponse> update(@RequestBody LoanRequest request, @PathVariable Long id) {
         return ResponseEntity.ok(this.loanService.update(request, id));

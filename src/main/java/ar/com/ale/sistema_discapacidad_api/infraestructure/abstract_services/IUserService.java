@@ -4,4 +4,5 @@ import ar.com.ale.sistema_discapacidad_api.api.models.requests.UserRequest;
 import ar.com.ale.sistema_discapacidad_api.api.models.responses.UserResponse;
 
 public interface IUserService extends CrudService<UserRequest, UserResponse, Long> {
+    UserResponse getById(Long id);
 }

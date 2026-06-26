@@ -11,5 +11,11 @@ public interface IFreePassRenewalService {
 
     List<FreePassRenewalResponse> readAll();
 
+    FreePassRenewalResponse getById(Long id);
+
     List<FreePassRenewalResponse> readByFreePassId(Long freePassId);
+
+    FreePassRenewalResponse update(FreePassRenewalRequest request, Long id);
+
+    void delete(Long id);
 }

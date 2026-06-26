@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -50,6 +51,7 @@ public class FreePassRenewalService implements IFreePassRenewalService{
         FreePassRenewalEntity renewal =
                 FreePassRenewalEntity.builder()
                         .year(request.getYear())
+                        .renewalDate(LocalDate.now())
                         .freePass(freePass)
                         .build();
 
@@ -69,7 +71,6 @@ public class FreePassRenewalService implements IFreePassRenewalService{
 
     @Override
     public List<FreePassRenewalResponse> readByFreePassId(Long freePassId) {
-        System.out.println("Entró al service");
         freePassRepository.findById(freePassId)
             .orElseThrow(() -> new ResponseStatusException(
                     HttpStatus.NOT_FOUND,
@@ -81,5 +82,40 @@ public class FreePassRenewalService implements IFreePassRenewalService{
                 .stream()
                 .map(renewalMapper::toResponse)
                 .toList();
+    }
+
+    @Override
+    public FreePassRenewalResponse getById(Long id) {
+        var renewal = renewalRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Renovación no encontrada"
+                ));
+        return renewalMapper.toResponse(renewal);
+    }
+
+    @Override
+    public FreePassRenewalResponse update(FreePassRenewalRequest request, Long id) {
+        var renewal = renewalRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Renovación no encontrada"
+                ));
+
+        renewal.setYear(request.getYear());
+        renewal.setRenewalDate(LocalDate.now());
+
+        var updated = renewalRepository.save(renewal);
+        return renewalMapper.toResponse(updated);
+    }
+
+    @Override
+    public void delete(Long id) {
+        var renewal = renewalRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Renovación no encontrada"
+                ));
+        renewalRepository.delete(renewal);
     }
 }
