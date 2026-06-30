@@ -4,4 +4,5 @@ import ar.com.ale.sistema_discapacidad_api.api.models.requests.PersonTrackingReq
 import ar.com.ale.sistema_discapacidad_api.api.models.responses.PersonTrackingResponse;
 
 public interface IPersonTrackingService extends CrudService<PersonTrackingRequest, PersonTrackingResponse, Long> {
+    PersonTrackingResponse getById(Long id);
 }

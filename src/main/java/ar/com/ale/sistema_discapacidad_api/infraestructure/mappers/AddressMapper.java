@@ -12,6 +12,7 @@ public interface AddressMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "person", ignore = true)
+    @Mapping(target = "personTracking", ignore = true)
     AddressEntity toEntity(AddressRequest request);
 
     AddressResponse toResponse(AddressEntity entity);

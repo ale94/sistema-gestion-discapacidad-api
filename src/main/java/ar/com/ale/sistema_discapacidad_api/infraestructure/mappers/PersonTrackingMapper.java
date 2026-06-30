@@ -10,6 +10,8 @@ import org.mapstruct.Mapping;
 public interface PersonTrackingMapper {
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "address", ignore = true)
+
     PersonTrackingEntity toEntity(PersonTrackingRequest request);
 
     PersonTrackingResponse toResponse(PersonTrackingEntity entity);
