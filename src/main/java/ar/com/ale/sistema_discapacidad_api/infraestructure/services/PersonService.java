@@ -4,12 +4,19 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import ar.com.ale.sistema_discapacidad_api.api.models.requests.PersonRegisterRequest;
 import ar.com.ale.sistema_discapacidad_api.api.models.responses.PersonResponse;
+import ar.com.ale.sistema_discapacidad_api.domain.entities.AddressEntity;
+import ar.com.ale.sistema_discapacidad_api.domain.entities.BenefitEntity;
+import ar.com.ale.sistema_discapacidad_api.domain.entities.EducationEntity;
+import ar.com.ale.sistema_discapacidad_api.domain.entities.HealthEntity;
 import ar.com.ale.sistema_discapacidad_api.domain.entities.PersonEntity;
+import ar.com.ale.sistema_discapacidad_api.domain.entities.WorkEntity;
 import ar.com.ale.sistema_discapacidad_api.domain.repositories.PersonRepository;
 import ar.com.ale.sistema_discapacidad_api.infraestructure.abstract_services.IPersonService;
 import ar.com.ale.sistema_discapacidad_api.infraestructure.mappers.AddressMapper;
@@ -84,6 +91,116 @@ public class PersonService implements IPersonService {
 
 	@Override
 	public PersonResponse update(PersonRegisterRequest request, Long id) {
+		// Buscamos la persona existente
+		var personToUpdate = this.personRepository.findById(id)
+				.orElseThrow(() -> new ResponseStatusException(
+					HttpStatus.NOT_FOUND,"Persona no encontrada con ID: " + id)
+				);
+
+		// Manejo seguro de la colección de familiares (Relación OneToMany)
+		if (personToUpdate.getFamilyMembers() != null) {
+			personToUpdate.getFamilyMembers().clear();
+		}
+		if (request.getFamilyMembers() != null) {
+			request.getFamilyMembers()
+					.stream()
+					.map(familyMapper::toEntity)
+					.forEach(familyMember -> {
+						familyMember.setPerson(personToUpdate); // Es crucial mantener la relación bidireccional
+						personToUpdate.addFamilyMember(familyMember);
+					});
+		}
+
+		// Actualización segura de Dirección (OneToOne)
+		if (request.getAddress() != null) {
+			var address = personToUpdate.getAddress();
+			if (address == null) {
+				address = new AddressEntity();
+				address.setPerson(personToUpdate);
+			}
+			address.setStreet(request.getAddress().getStreet());
+			address.setDistrict(request.getAddress().getDistrict());
+			address.setLocality(request.getAddress().getLocality());
+			address.setProvince(request.getAddress().getProvince());
+			personToUpdate.setAddress(address);
+		}
+
+		// Actualización segura de Trabajo (OneToOne)
+		if (request.getWork() != null) {
+			var work = personToUpdate.getWork();
+			if (work == null) {
+				work = new WorkEntity();
+				work.setPerson(personToUpdate);
+			}
+			work.setCompanyName(request.getWork().getCompanyName());
+			work.setStatus(request.getWork().getStatus());
+			work.setAddress(request.getWork().getAddress());
+			work.setSocialWork(request.getWork().getSocialWork());
+			work.setNameSocialWork(request.getWork().getNameSocialWork());
+			personToUpdate.setWork(work);
+		}
+
+		// Actualización segura de Educación (OneToOne)
+		if (request.getEducation() != null) {
+			var education = personToUpdate.getEducation();
+			if (education == null) {
+				education = new EducationEntity();
+				education.setPerson(personToUpdate);
+			}
+			education.setName(request.getEducation().getName());
+			education.setAddress(request.getEducation().getAddress());
+			education.setEducationLevel(request.getEducation().getEducationLevel());
+			personToUpdate.setEducation(education);
+		}
+
+		// Actualización segura de Salud (OneToOne)
+		if (request.getHealth() != null) {
+			var health = personToUpdate.getHealth();
+			if (health == null) {
+				health = new HealthEntity();
+				health.setPerson(personToUpdate);
+			}
+			health.setCudNumber(request.getHealth().getCudNumber());
+			health.setActiveCud(request.getHealth().getActiveCud());
+			health.setRehabilitationTreatment(request.getHealth().getRehabilitationTreatment());
+			health.setDiagnostic(request.getHealth().getDiagnostic());
+			health.setDisabilityType(request.getHealth().getDisabilityType());
+			personToUpdate.setHealth(health);
+		}
+
+		// Actualización segura de Beneficios (OneToOne)
+		if (request.getBenefit() != null) {
+			var benefit = personToUpdate.getBenefit();
+			if (benefit == null) {
+				benefit = new BenefitEntity();
+				benefit.setPerson(personToUpdate);
+			}
+			benefit.setFederalProgram(request.getBenefit().getFederalProgram());
+			benefit.setPension(request.getBenefit().getPension());
+			benefit.setAuh(request.getBenefit().getAuh());
+			benefit.setMerchandise(request.getBenefit().getMerchandise());
+			benefit.setFreePass(request.getBenefit().getFreePass());
+			personToUpdate.setBenefit(benefit);
+		}
+
+		// Campos básicos de la Persona
+		personToUpdate.setFirstName(request.getFirstName());
+		personToUpdate.setLastName(request.getLastName());
+		personToUpdate.setDni(request.getDni());
+		personToUpdate.setCivilStatus(request.getCivilStatus());
+		personToUpdate.setDateBirth(request.getDateBirth());
+		personToUpdate.setTutor(request.getTutor());
+		personToUpdate.setPhone(request.getPhone());
+		personToUpdate.setGender(request.getGender());
+
+		// Guardar cambios
+		var personToUpdated = this.personRepository.save(personToUpdate);
+
+		return this.personMapper.toResponse(personToUpdated);
+	}
+	/*
+	@Override
+	public PersonResponse update(PersonRegisterRequest request, Long id) {
 		var personToUpdate = this.personRepository.findById(id)
 				.orElseThrow();
 
@@ -138,7 +255,7 @@ public class PersonService implements IPersonService {
 		var personToUpdated = this.personRepository.save(personToUpdate);
 
 		return this.personMapper.toResponse(personToUpdated);
-	}
+	}*/
 
 	@Override
 	public List<PersonResponse> readAll() {

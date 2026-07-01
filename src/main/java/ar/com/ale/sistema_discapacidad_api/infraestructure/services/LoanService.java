@@ -26,7 +26,7 @@ public class LoanService implements ILoanService {
 
         var loanToPersist = LoanEntity.builder()
                 .type(request.getType())
-                //.equipmentNumber(request.getEquipmentNumber())
+                .equipmentNumber(request.getEquipmentNumber())
                 .dni(request.getDni())
                 .applicant(request.getApplicant())
                 .address(request.getAddress())
@@ -52,7 +52,7 @@ public class LoanService implements ILoanService {
     public LoanResponse update(LoanRequest request, Long id) {
         var loanToUpdate = this.loanRepository.findById(id).orElseThrow();
         loanToUpdate.setType(request.getType());
-        //loanToUpdate.setEquipmentNumber(request.getEquipmentNumber());
+        loanToUpdate.setEquipmentNumber(request.getEquipmentNumber());
         loanToUpdate.setDni(request.getDni());
         loanToUpdate.setApplicant(request.getApplicant());
         loanToUpdate.setAddress(request.getAddress());
