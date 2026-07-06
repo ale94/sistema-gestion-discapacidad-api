@@ -1,5 +1,6 @@
 package ar.com.ale.sistema_discapacidad_api.api.controllers;
 
+import ar.com.ale.sistema_discapacidad_api.api.models.requests.FreePassActiveRequest;
 import ar.com.ale.sistema_discapacidad_api.api.models.requests.FreePassRequest;
 import ar.com.ale.sistema_discapacidad_api.api.models.requests.FreePassStatusRequest;
 import ar.com.ale.sistema_discapacidad_api.api.models.responses.FreePassResponse;
@@ -52,6 +53,25 @@ public class FreePassController {
             @RequestBody FreePassStatusRequest request) {
 
         return freePassService.updateStatus(id, request);
+    }
+
+    @PatchMapping("/{id}/active")
+    public FreePassResponse updateActive(
+            @PathVariable Long id,
+            @RequestBody FreePassActiveRequest request) {
+
+        return freePassService.updateActive(id, request);
+    }
+
+    @GetMapping("/active")
+    public List<FreePassResponse> getByActive(
+            @RequestParam(required = false) Boolean active) {
+
+        if (active == null) {
+            return freePassService.readAll();
+        }
+
+        return freePassService.readByActive(active);
     }
 
     @DeleteMapping("/{id}")
