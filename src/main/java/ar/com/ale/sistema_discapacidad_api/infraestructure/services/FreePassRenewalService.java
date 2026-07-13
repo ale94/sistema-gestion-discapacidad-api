@@ -84,4 +84,17 @@ public class FreePassRenewalService implements IFreePassRenewalService{
                 .map(renewalMapper::toResponse)
                 .toList();
     }
+
+    @Override
+    public void delete(Long id) {
+
+        FreePassRenewalEntity renewal = renewalRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "Renovación no encontrada"
+                        ));
+
+        renewalRepository.delete(renewal);
+    }
 }

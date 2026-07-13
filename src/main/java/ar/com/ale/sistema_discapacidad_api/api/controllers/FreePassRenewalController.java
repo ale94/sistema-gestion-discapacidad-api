@@ -33,4 +33,10 @@ public class FreePassRenewalController {
     public List<FreePassRenewalResponse> getByFreePassId(@PathVariable Long freePassId) {
         return this.renewalService.readByFreePassId(freePassId);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        renewalService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
