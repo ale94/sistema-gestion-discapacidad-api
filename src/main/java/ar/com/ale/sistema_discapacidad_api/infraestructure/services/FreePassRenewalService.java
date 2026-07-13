@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -50,6 +51,7 @@ public class FreePassRenewalService implements IFreePassRenewalService{
         FreePassRenewalEntity renewal =
                 FreePassRenewalEntity.builder()
                         .year(request.getYear())
+                        .renewalDate(LocalDate.now())
                         .freePass(freePass)
                         .build();
 
