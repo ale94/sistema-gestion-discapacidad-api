@@ -16,6 +16,6 @@ public class PersonTrackingResponse {
     private String firstName;
     private Long dni;
     private String indicatorType;
-    private String address;
+    private AddressResponse address;
     private Long phone;
 }

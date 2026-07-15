@@ -16,6 +16,6 @@ public class UserRequest implements Serializable {
     private String lastName;
     private String userName;
     private String password;
-    private String dni;
+    private Long dni;
     private String role;
 }

@@ -57,6 +57,7 @@ public class LoanService implements ILoanService {
         loanToUpdate.setApplicant(request.getApplicant());
         loanToUpdate.setAddress(request.getAddress());
         loanToUpdate.setPhone(request.getPhone());
+        loanToUpdate.setExpiration(request.getExpiration());
         loanToUpdate.setReturnDate(request.getReturnDate());
         var loanUpdated = this.loanRepository.save(loanToUpdate);
         return this.loanMapper.toResponse(loanUpdated);

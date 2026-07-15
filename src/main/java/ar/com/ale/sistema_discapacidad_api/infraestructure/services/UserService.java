@@ -29,9 +29,9 @@ public class UserService implements IUserService {
         var userToPersist = UserEntity.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
-                .userName(request.getDni())
+                .userName(request.getDni().toString())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .dni(Long.parseLong(request.getDni()))
+                .dni(request.getDni())
                 .role(request.getRole())
                 .active(true)
                 .build();
@@ -55,7 +55,7 @@ public class UserService implements IUserService {
         if (request.getPassword() != null && !request.getPassword().isBlank()) {
             userToUpdate.setPassword(passwordEncoder.encode(request.getPassword()));
         }
-        userToUpdate.setDni(Long.parseLong(request.getDni()));
+        userToUpdate.setDni(request.getDni());
         userToUpdate.setRole(request.getRole());
         var userUpdated = userRepository.save(userToUpdate);
         return this.userMapper.toResponse(userUpdated);

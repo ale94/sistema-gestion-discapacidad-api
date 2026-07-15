@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -50,6 +51,7 @@ public class FreePassRenewalService implements IFreePassRenewalService{
         FreePassRenewalEntity renewal =
                 FreePassRenewalEntity.builder()
                         .year(request.getYear())
+                        .renewalDate(LocalDate.now())
                         .freePass(freePass)
                         .build();
 
@@ -81,5 +83,18 @@ public class FreePassRenewalService implements IFreePassRenewalService{
                 .stream()
                 .map(renewalMapper::toResponse)
                 .toList();
+    }
+
+    @Override
+    public void delete(Long id) {
+
+        FreePassRenewalEntity renewal = renewalRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "Renovación no encontrada"
+                        ));
+
+        renewalRepository.delete(renewal);
     }
 }

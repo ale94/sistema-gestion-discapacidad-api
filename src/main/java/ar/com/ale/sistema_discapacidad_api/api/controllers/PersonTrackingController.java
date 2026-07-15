@@ -3,6 +3,7 @@ package ar.com.ale.sistema_discapacidad_api.api.controllers;
 import ar.com.ale.sistema_discapacidad_api.api.models.requests.PersonTrackingRequest;
 import ar.com.ale.sistema_discapacidad_api.api.models.responses.PersonTrackingResponse;
 import ar.com.ale.sistema_discapacidad_api.infraestructure.abstract_services.IPersonTrackingService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class PersonTrackingController {
     private final IPersonTrackingService personTrackingService;
 
     @PostMapping
-    ResponseEntity<PersonTrackingResponse> save(@RequestBody PersonTrackingRequest request) {
+    ResponseEntity<PersonTrackingResponse> save(@Valid @RequestBody PersonTrackingRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.personTrackingService.create(request));
     }
 
@@ -27,8 +28,13 @@ public class PersonTrackingController {
         return ResponseEntity.ok(this.personTrackingService.readAll());
     }
 
+    @GetMapping("/{id}")
+    ResponseEntity<PersonTrackingResponse> getById(@PathVariable Long id){
+        return ResponseEntity.ok(personTrackingService.getById(id));
+    }
+
     @PutMapping("/{id}")
-    ResponseEntity<PersonTrackingResponse> update(@RequestBody PersonTrackingRequest request, @PathVariable Long id) {
+    ResponseEntity<PersonTrackingResponse> update(@Valid @RequestBody PersonTrackingRequest request, @PathVariable Long id) {
         return ResponseEntity.ok(this.personTrackingService.update(request, id));
     }
 

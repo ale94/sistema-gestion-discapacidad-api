@@ -1,9 +1,12 @@
 package ar.com.ale.sistema_discapacidad_api.domain.entities;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,8 +25,13 @@ public class PersonTrackingEntity implements Serializable {
     private Long id;
     private String lastName;
     private String firstName;
+
+    @Column(unique = true, nullable = false)
     private Long dni;
+    
     private String indicatorType;
-    private String address;
     private Long phone;
+
+    @OneToOne(mappedBy = "personTracking", cascade = CascadeType.ALL)
+    private AddressEntity address;
 }

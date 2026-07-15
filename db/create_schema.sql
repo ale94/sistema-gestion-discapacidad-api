@@ -180,8 +180,6 @@ CREATE TABLE users
 -- =========================
 CREATE TABLE free_pass (
     id BIGSERIAL PRIMARY KEY,
-    type VARCHAR(50) NOT NULL,          -- Mapea FreePassType (Enum STRING)
-    start_date DATE NOT NULL,           
     reason VARCHAR(255),                
     active BOOLEAN DEFAULT TRUE,        
     status VARCHAR(50) NOT NULL,        -- Mapea FreePassStatus (Enum STRING)

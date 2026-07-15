@@ -22,141 +22,128 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class NationalFreePassService
-        implements INationalFreePassService {
+                implements INationalFreePassService {
 
-    private final NationalFreePassRepository repository;
-    private final PersonRepository personRepository;
-    private final NationalFreePassMapper mapper;
+        private final NationalFreePassRepository repository;
+        private final PersonRepository personRepository;
+        private final NationalFreePassMapper mapper;
 
-    @Override
-    public NationalFreePassResponse create(
-            NationalFreePassRequest request) {
+        @Override
+        public NationalFreePassResponse create(
+                        NationalFreePassRequest request) {
 
-        var person =
-                personRepository.findById(
-                        request.getPersonId())
-                .orElseThrow(() ->
-                        new ResponseStatusException(
-                                HttpStatus.NOT_FOUND,
-                                "Persona no encontrada"
-                        ));
+                var person = personRepository.findById(
+                                request.getPersonId())
+                                .orElseThrow(() -> new ResponseStatusException(
+                                                HttpStatus.NOT_FOUND,
+                                                "Persona no encontrada"));
 
-        if (person.getHealth() == null ||
-                !Boolean.TRUE.equals(
-                        person.getHealth().getActiveCud())) {
+                if (person.getHealth() == null ||
+                                !Boolean.TRUE.equals(
+                                                person.getHealth().getActiveCud())) {
 
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "La persona no posee un CUD vigente"
-            );
+                        throw new ResponseStatusException(
+                                        HttpStatus.BAD_REQUEST,
+                                        "La persona no posee un CUD vigente");
+                }
+
+                NationalFreePassEntity pass = NationalFreePassEntity.builder()
+                                .person(person)
+                                .tripDate(request.getTripDate())
+                                .ticketQuantity(request.getTicketQuantity())
+                                .origin(request.getOrigin())
+                                .destination(request.getDestination())
+                                .status(request.getStatus() != null
+                                                ? request.getStatus()
+                                                : FreePassStatus.PENDIENTE)
+                                .reason(request.getReason())
+                                .build();
+
+                pass = repository.save(pass);
+
+                return mapper.toResponse(pass);
         }
 
-        NationalFreePassEntity pass =
-                NationalFreePassEntity.builder()
-                        .person(person)
-                        .tripDate(request.getTripDate())
-                        .ticketQuantity(request.getTicketQuantity())
-                        .origin(request.getOrigin())
-                        .destination(request.getDestination())
-                        .status(request.getStatus() != null
-                                ? request.getStatus()
-                                : FreePassStatus.PENDIENTE)
-                        .reason(request.getReason())
-                        .build();
+        @Override
+        public List<NationalFreePassResponse> readAll() {
 
-        pass = repository.save(pass);
-
-        return mapper.toResponse(pass);
-    }
-
-    @Override
-    public List<NationalFreePassResponse> readAll() {
-
-        return repository.findAll()
-                .stream()
-                .map(mapper::toResponse)
-                .toList();
-    }
-
-    @Override
-    public NationalFreePassResponse readById(Long id) {
-
-        var pass = repository.findById(id)
-                .orElseThrow(() ->
-                        new ResponseStatusException(
-                                HttpStatus.NOT_FOUND,
-                                "Solicitud no encontrada"
-                        ));
-
-        return mapper.toResponse(pass);
-    }
-
-    @Override
-    public List<NationalFreePassResponse> readByPersonId(Long personId) {
-
-        return repository.findByPersonId(personId)
-                .stream()
-                .map(mapper::toResponse)
-                .toList();
-    }
-
-    @Override
-    public NationalFreePassResponse update(NationalFreePassRequest request, Long id) {
-
-        NationalFreePassEntity pass =
-                repository.findById(id)
-                        .orElseThrow(() ->
-                                new ResponseStatusException(
-                                        HttpStatus.NOT_FOUND,
-                                        "Solicitud no encontrada"
-                                ));
-
-        pass.setTripDate(request.getTripDate());
-        pass.setTicketQuantity(request.getTicketQuantity());
-        pass.setOrigin(request.getOrigin());
-        pass.setDestination(request.getDestination());
-        pass.setReason(request.getReason());
-
-        NationalFreePassEntity updated = repository.save(pass);
-
-        return mapper.toResponse(updated);
-    }
-
-    @Override
-    public void delete(Long id) {
-
-        var pass = repository.findById(id)
-                .orElseThrow(() ->
-                        new ResponseStatusException(
-                                HttpStatus.NOT_FOUND,
-                                "Solicitud no encontrada"
-                        ));
-
-        repository.delete(pass);
-    }
-
-    @Override
-    public NationalFreePassResponse updateStatus(Long id, NationalFreePassStatusRequest request) {
-
-        NationalFreePassEntity pass =
-                repository.findById(id)
-                        .orElseThrow(() ->
-                                new ResponseStatusException(
-                                        HttpStatus.NOT_FOUND,
-                                        "Solicitud no encontrada"
-                                ));
-
-        if (request.getStatus() == null) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "Debe indicar un estado"
-            );
+                return repository.findAll()
+                                .stream()
+                                .map(mapper::toResponse)
+                                .toList();
         }
 
-        pass.setStatus(request.getStatus());
+        @Override
+        public NationalFreePassResponse readById(Long id) {
 
-        NationalFreePassEntity updated = repository.save(pass);
+                var pass = repository.findById(id)
+                                .orElseThrow(() -> new ResponseStatusException(
+                                                HttpStatus.NOT_FOUND,
+                                                "Solicitud no encontrada"));
 
-        return mapper.toResponse(updated);
-    }
+                return mapper.toResponse(pass);
+        }
+
+        @Override
+        public List<NationalFreePassResponse> readByPersonId(Long personId) {
+
+                return repository.findByPersonId(personId)
+                                .stream()
+                                .map(mapper::toResponse)
+                                .toList();
+        }
+
+        @Override
+        public NationalFreePassResponse update(NationalFreePassRequest request, Long id) {
+
+                NationalFreePassEntity pass = repository.findById(id)
+                                .orElseThrow(() -> new ResponseStatusException(
+                                                HttpStatus.NOT_FOUND,
+                                                "Solicitud no encontrada"));
+
+                pass.setTripDate(request.getTripDate());
+                pass.setTicketQuantity(request.getTicketQuantity());
+                pass.setOrigin(request.getOrigin());
+                pass.setDestination(request.getDestination());
+                pass.setReason(request.getReason());
+                if (request.getStatus() != null) {
+                        pass.setStatus(request.getStatus());
+                }
+
+                NationalFreePassEntity updated = repository.save(pass);
+
+                return mapper.toResponse(updated);
+        }
+
+        @Override
+        public void delete(Long id) {
+
+                var pass = repository.findById(id)
+                                .orElseThrow(() -> new ResponseStatusException(
+                                                HttpStatus.NOT_FOUND,
+                                                "Solicitud no encontrada"));
+
+                repository.delete(pass);
+        }
+
+        @Override
+        public NationalFreePassResponse updateStatus(Long id, NationalFreePassStatusRequest request) {
+
+                NationalFreePassEntity pass = repository.findById(id)
+                                .orElseThrow(() -> new ResponseStatusException(
+                                                HttpStatus.NOT_FOUND,
+                                                "Solicitud no encontrada"));
+
+                if (request.getStatus() == null) {
+                        throw new ResponseStatusException(
+                                        HttpStatus.BAD_REQUEST,
+                                        "Debe indicar un estado");
+                }
+
+                pass.setStatus(request.getStatus());
+
+                NationalFreePassEntity updated = repository.save(pass);
+
+                return mapper.toResponse(updated);
+        }
 }

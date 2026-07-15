@@ -24,22 +24,22 @@ public class DataInitializer implements CommandLineRunner {
     private void seedUsers() {
         var admin = UserRequest.builder()
                 .firstName("Maria Eugenia").lastName("Velasquez")
-                .dni("34091232").password("admin").role("ADMIN").build();
+                .dni(34091232L).password("admin").role("ADMIN").build();
         userService.create(admin);
 
         var user1 = UserRequest.builder()
                 .firstName("Celeste Licia").lastName("Gutiérrez")
-                .dni("33183555").password("1234").role("USER").build();
+                .dni(33183555L).password("1234").role("USER").build();
         userService.create(user1);
 
         var user2 = UserRequest.builder()
                 .firstName("Tamara Zoe").lastName("Zambrano")
-                .dni("41902113").password("1234").role("USER").build();
+                .dni(41902113L).password("1234").role("USER").build();
         userService.create(user2);
 
         var user3 = UserRequest.builder()
                 .firstName("Fernanda Antonella").lastName("Cerpa")
-                .dni("39201327").password("1234").role("USER").build();
+                .dni(39201327L).password("1234").role("USER").build();
         userService.create(user3);
     }
 }

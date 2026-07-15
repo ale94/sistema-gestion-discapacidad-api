@@ -1,5 +1,6 @@
 package ar.com.ale.sistema_discapacidad_api.infraestructure.services;
 
+import ar.com.ale.sistema_discapacidad_api.api.models.requests.FreePassActiveRequest;
 import ar.com.ale.sistema_discapacidad_api.api.models.requests.FreePassRequest;
 import ar.com.ale.sistema_discapacidad_api.api.models.requests.FreePassStatusRequest;
 import ar.com.ale.sistema_discapacidad_api.api.models.responses.FreePassResponse;
@@ -145,4 +146,43 @@ public class FreePassService implements IFreePassService{
 
         freePassRepository.delete(freePass);
     }
+
+    @Override
+    public FreePassResponse updateActive(Long id, FreePassActiveRequest request) {
+        FreePassEntity freePass =
+                freePassRepository.findById(id)
+                        .orElseThrow(() ->
+                                new ResponseStatusException(
+                                        HttpStatus.NOT_FOUND,
+                                        "Pase libre no encontrado"
+                                ));
+
+        if (request.getActive() == null) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "Debe indicar si el pase está activo"
+                );
+        }
+
+        freePass.setActive(request.getActive());
+
+        FreePassEntity updated = freePassRepository.save(freePass);
+
+        return freePassMapper.toResponse(updated);
+    }
+
+    @Override
+    public List<FreePassResponse> readByActive(Boolean active) {
+
+        if (active == null) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "Debe indicar si desea consultar pases activos o inactivos"
+                );
+        }
+        return freePassRepository.findByActive(active)
+                .stream()
+                .map(freePassMapper::toResponse)
+                .toList();
+   }
 }

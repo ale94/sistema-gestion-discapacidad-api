@@ -32,4 +32,7 @@ public class AddressEntity implements Serializable {
     @JoinColumn(name = "person_id")
     private PersonEntity person;
 
+    @OneToOne
+    @JoinColumn(name = "person_tracking_id")
+    private PersonTrackingEntity personTracking;
 }
