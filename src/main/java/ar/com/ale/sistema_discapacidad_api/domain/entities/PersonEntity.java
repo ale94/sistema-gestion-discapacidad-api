@@ -20,7 +20,10 @@ public class PersonEntity implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;
+
+    @Column(unique = true, nullable = false)
     private Long dni;
+    
     private String civilStatus;
     private LocalDate dateBirth;
     private String tutor;
