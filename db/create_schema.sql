@@ -51,6 +51,7 @@ CREATE TABLE health
     rehabilitation_treatment BOOLEAN,
     diagnostic               VARCHAR(50),
     disability_type          VARCHAR(50),
+    expiration_date          DATE,
     person_id                BIGINT UNIQUE,
     CONSTRAINT fk_health_person FOREIGN KEY (person_id) REFERENCES person (id) ON DELETE CASCADE
 );

@@ -165,6 +165,7 @@ public class PersonService implements IPersonService {
 			health.setRehabilitationTreatment(request.getHealth().getRehabilitationTreatment());
 			health.setDiagnostic(request.getHealth().getDiagnostic());
 			health.setDisabilityType(request.getHealth().getDisabilityType());
+			health.setExpirationDate(request.getHealth().getExpirationDate());
 			personToUpdate.setHealth(health);
 		}
 
