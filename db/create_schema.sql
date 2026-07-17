@@ -24,6 +24,7 @@ CREATE TABLE education
     name            VARCHAR(200),
     address         VARCHAR(200),
     education_level VARCHAR(100),
+    education_status VARCHAR(20),
     person_id       BIGINT UNIQUE,
     CONSTRAINT fk_education_person FOREIGN KEY (person_id) REFERENCES person (id) ON DELETE CASCADE
 );

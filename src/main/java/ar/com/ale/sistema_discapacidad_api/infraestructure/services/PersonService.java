@@ -155,6 +155,7 @@ public class PersonService implements IPersonService {
 			education.setName(request.getEducation().getName());
 			education.setAddress(request.getEducation().getAddress());
 			education.setEducationLevel(request.getEducation().getEducationLevel());
+			education.setEducationStatus(request.getEducation().getEducationStatus());
 			personToUpdate.setEducation(education);
 		}
 
