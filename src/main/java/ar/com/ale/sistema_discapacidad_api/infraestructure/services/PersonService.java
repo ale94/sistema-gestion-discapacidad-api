@@ -185,6 +185,7 @@ public class PersonService implements IPersonService {
 			benefit.setFederalProgram(request.getBenefit().getFederalProgram());
 			benefit.setPension(request.getBenefit().getPension());
 			benefit.setAuh(request.getBenefit().getAuh());
+			benefit.setSuaf(request.getBenefit().getSuaf());
 			benefit.setMerchandise(request.getBenefit().getMerchandise());
 			benefit.setFreePass(request.getBenefit().getFreePass());
 			personToUpdate.setBenefit(benefit);

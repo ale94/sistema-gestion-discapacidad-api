@@ -80,6 +80,7 @@ CREATE TABLE benefit
     free_pass       BOOLEAN,
     federal_program BOOLEAN,
     auh             BOOLEAN,
+    suaf            BOOLEAN,
     merchandise     BOOLEAN,
     person_id       BIGINT UNIQUE,
     CONSTRAINT fk_benefit_person FOREIGN KEY (person_id) REFERENCES person (id) ON DELETE CASCADE
