@@ -20,6 +20,7 @@ public class PersonRegisterRequest implements Serializable {
     private Long dni;
     private String civilStatus;
     private LocalDate dateBirth;
+    private LocalDate dateDeath;
     private String tutor;
     private Long phone;
     private String gender;

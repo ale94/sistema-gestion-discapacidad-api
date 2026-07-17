@@ -45,6 +45,8 @@ public class PersonService implements IPersonService {
 	@Override
 	public PersonResponse create(PersonRegisterRequest request) {
 
+		validateDeathDate(request);
+
 		var address = this.addressMapper.toEntity(request.getAddress());
 		var work = this.workMapper.toEntity(request.getWork());
 		var education = this.educationMapper.toEntity(request.getEducation());
@@ -57,6 +59,7 @@ public class PersonService implements IPersonService {
 				.dni(request.getDni())
 				.civilStatus(request.getCivilStatus())
 				.dateBirth(request.getDateBirth())
+				.dateDeath(request.getDateDeath())
 				.tutor(request.getTutor())
 				.phone(request.getPhone())
 				.gender(request.getGender())
@@ -96,6 +99,8 @@ public class PersonService implements IPersonService {
 				.orElseThrow(() -> new ResponseStatusException(
 					HttpStatus.NOT_FOUND,"Persona no encontrada con ID: " + id)
 				);
+
+		validateDeathDate(request);
 
 		// Manejo seguro de la colección de familiares (Relación OneToMany)
 		if (personToUpdate.getFamilyMembers() != null) {
@@ -190,6 +195,7 @@ public class PersonService implements IPersonService {
 		personToUpdate.setDni(request.getDni());
 		personToUpdate.setCivilStatus(request.getCivilStatus());
 		personToUpdate.setDateBirth(request.getDateBirth());
+		personToUpdate.setDateDeath(request.getDateDeath());
 		personToUpdate.setTutor(request.getTutor());
 		personToUpdate.setPhone(request.getPhone());
 		personToUpdate.setGender(request.getGender());
@@ -279,4 +285,24 @@ public class PersonService implements IPersonService {
 		return this.personMapper.toResponse(person);
 	}
 
+	private void validateDeathDate(PersonRegisterRequest request) {
+
+		if (request.getDateDeath() == null) {
+			return;
+		}
+
+		if (request.getDateDeath().isAfter(LocalDate.now())) {
+			throw new ResponseStatusException(
+					HttpStatus.BAD_REQUEST,
+					"La fecha de fallecimiento no puede ser futura.");
+		}
+
+		if (request.getDateBirth() != null &&
+			request.getDateDeath().isBefore(request.getDateBirth())) {
+
+			throw new ResponseStatusException(
+					HttpStatus.BAD_REQUEST,
+					"La fecha de fallecimiento no puede ser anterior a la fecha de nacimiento.");
+		}
+	}
 }

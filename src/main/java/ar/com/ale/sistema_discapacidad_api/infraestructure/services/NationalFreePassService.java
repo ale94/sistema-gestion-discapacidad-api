@@ -29,8 +29,7 @@ public class NationalFreePassService
         private final NationalFreePassMapper mapper;
 
         @Override
-        public NationalFreePassResponse create(
-                        NationalFreePassRequest request) {
+        public NationalFreePassResponse create( NationalFreePassRequest request) {
 
                 var person = personRepository.findById(
                                 request.getPersonId())
@@ -45,6 +44,12 @@ public class NationalFreePassService
                         throw new ResponseStatusException(
                                         HttpStatus.BAD_REQUEST,
                                         "La persona no posee un CUD vigente");
+                }
+
+                if (person.getDateDeath() != null) {
+                        throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "No se pueden realizar operaciones porque la persona se encuentra fallecida.");
                 }
 
                 NationalFreePassEntity pass = NationalFreePassEntity.builder()

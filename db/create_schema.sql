@@ -9,6 +9,7 @@ CREATE TABLE person
     dni               BIGINT UNIQUE,
     civil_status      VARCHAR(50),
     date_birth        DATE,
+    date_death        DATE,
     tutor             VARCHAR(100),
     phone             BIGSERIAL,
     gender            VARCHAR(100),
