@@ -1,6 +1,7 @@
 package ar.com.ale.sistema_discapacidad_api.api.models.responses;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,4 +19,5 @@ public class HealthResponse implements Serializable {
     private Boolean rehabilitationTreatment;
     private String diagnostic;
     private String disabilityType;
+    private LocalDate expirationDate;
 }

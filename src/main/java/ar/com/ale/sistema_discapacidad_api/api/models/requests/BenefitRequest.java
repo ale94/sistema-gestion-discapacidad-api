@@ -16,6 +16,7 @@ public class BenefitRequest implements Serializable {
     private Boolean federalProgram;
     private Boolean pension;
     private Boolean auh;
+    private Boolean suaf;
     private Boolean merchandise;
     private Boolean freePass;
 

@@ -9,6 +9,7 @@ CREATE TABLE person
     dni               BIGINT UNIQUE,
     civil_status      VARCHAR(50),
     date_birth        DATE,
+    date_death        DATE,
     tutor             VARCHAR(100),
     phone             BIGSERIAL,
     gender            VARCHAR(100),
@@ -23,6 +24,7 @@ CREATE TABLE education
     name            VARCHAR(200),
     address         VARCHAR(200),
     education_level VARCHAR(100),
+    education_status VARCHAR(20),
     person_id       BIGINT UNIQUE,
     CONSTRAINT fk_education_person FOREIGN KEY (person_id) REFERENCES person (id) ON DELETE CASCADE
 );
@@ -51,6 +53,7 @@ CREATE TABLE health
     rehabilitation_treatment BOOLEAN,
     diagnostic               VARCHAR(50),
     disability_type          VARCHAR(50),
+    expiration_date          DATE,
     person_id                BIGINT UNIQUE,
     CONSTRAINT fk_health_person FOREIGN KEY (person_id) REFERENCES person (id) ON DELETE CASCADE
 );
@@ -77,6 +80,7 @@ CREATE TABLE benefit
     free_pass       BOOLEAN,
     federal_program BOOLEAN,
     auh             BOOLEAN,
+    suaf            BOOLEAN,
     merchandise     BOOLEAN,
     person_id       BIGINT UNIQUE,
     CONSTRAINT fk_benefit_person FOREIGN KEY (person_id) REFERENCES person (id) ON DELETE CASCADE

@@ -26,6 +26,10 @@ public class PersonEntity implements Serializable {
     
     private String civilStatus;
     private LocalDate dateBirth;
+
+    @Column(name = "date_death")
+    private LocalDate dateDeath;
+    
     private String tutor;
     private Long phone;
     private String gender;

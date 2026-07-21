@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+import ar.com.ale.sistema_discapacidad_api.domain.enums.EducationStatus;
+
 @Entity(name = "education")
 @Data
 @NoArgsConstructor
@@ -21,6 +23,10 @@ public class EducationEntity implements Serializable {
     private String name;
     private String address;
     private String educationLevel;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "education_status")
+    private EducationStatus educationStatus;
 
     @OneToOne
     @JoinColumn(name = "person_id")

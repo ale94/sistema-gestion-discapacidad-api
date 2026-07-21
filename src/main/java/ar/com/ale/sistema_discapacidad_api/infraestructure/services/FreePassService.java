@@ -42,6 +42,12 @@ public class FreePassService implements IFreePassService{
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"La persona no posee un CUD vigente");
         }
 
+        if (person.getDateDeath() != null) {
+                throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "No se pueden realizar operaciones porque la persona se encuentra fallecida.");
+        }
+
         boolean exists = freePassRepository
                 .existsByPersonId(
                         request.getPersonId()

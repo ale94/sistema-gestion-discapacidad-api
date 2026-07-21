@@ -1,6 +1,7 @@
 package ar.com.ale.sistema_discapacidad_api.domain.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +29,7 @@ public class HealthEntity implements Serializable {
     private Boolean rehabilitationTreatment;
     private String diagnostic;
     private String disabilityType;
+    private LocalDate expirationDate;
 
     @OneToOne
     @JoinColumn(name = "person_id")
