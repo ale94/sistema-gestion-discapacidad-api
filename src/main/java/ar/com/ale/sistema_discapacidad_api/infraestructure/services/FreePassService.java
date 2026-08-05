@@ -62,6 +62,11 @@ public class FreePassService implements IFreePassService{
         FreePassEntity freePass = FreePassEntity.builder()
                 .person(person)
                 .reason(request.getReason())
+                .requestDate(
+                        request.getRequestDate() != null
+                                ? request.getRequestDate()
+                                : java.time.LocalDate.now()
+        )
                 .status(
                         request.getStatus() != null
                                 ? request.getStatus()
@@ -109,6 +114,7 @@ public class FreePassService implements IFreePassService{
                         ));
 
         freePass.setReason(request.getReason());
+        freePass.setRequestDate(request.getRequestDate());
 
         FreePassEntity updated =
                 freePassRepository.save(freePass);

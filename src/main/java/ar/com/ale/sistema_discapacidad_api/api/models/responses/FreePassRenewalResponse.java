@@ -3,6 +3,7 @@ package ar.com.ale.sistema_discapacidad_api.api.models.responses;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "id",
     "freePassId",
     "year",
+    "renewalDate",
     "createdAt"
 })
 @Data
@@ -22,6 +24,8 @@ public class FreePassRenewalResponse {
     private Long freePassId;
 
     private Integer year;
+
+    private LocalDate renewalDate;
 
     private LocalDateTime createdAt;
 

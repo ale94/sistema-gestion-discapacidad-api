@@ -28,6 +28,8 @@ public class NationalFreePassEntity implements Serializable{
     @JoinColumn(name = "person_id")
     private PersonEntity person;
 
+    private LocalDate requestDate;
+
     private LocalDate tripDate;
 
     private Integer ticketQuantity;

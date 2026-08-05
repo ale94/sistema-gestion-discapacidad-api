@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "personId",
     "dni",
     "fullName",
+    "requestDate",
     "tripDate",
     "ticketQuantity",
     "origin",
@@ -34,6 +35,8 @@ public class NationalFreePassResponse {
     private Long dni;
 
     private String fullName;
+
+    private LocalDate requestDate;
 
     private LocalDate tripDate;
 

@@ -184,7 +184,8 @@ CREATE TABLE users
 -- =========================
 CREATE TABLE free_pass (
     id BIGSERIAL PRIMARY KEY,
-    reason VARCHAR(255),                
+    reason VARCHAR(255),  
+    request_date DATE,              
     active BOOLEAN DEFAULT TRUE,        
     status VARCHAR(50) NOT NULL,        -- Mapea FreePassStatus (Enum STRING)
     person_id BIGINT NOT NULL,          
@@ -203,4 +204,36 @@ CREATE TABLE free_pass_renewal (
     free_pass_id BIGINT NOT NULL,       -- Relación @ManyToOne con FreePassEntity
     
     CONSTRAINT fk_renewal_free_pass FOREIGN KEY (free_pass_id) REFERENCES free_pass(id) ON DELETE CASCADE
+);
+
+-- =========================
+-- NATIONAL FREE PASS
+-- =========================
+CREATE TABLE national_free_pass (
+    id BIGSERIAL PRIMARY KEY,
+
+    person_id BIGINT NOT NULL,
+
+    request_date DATE,                  -- Fecha en que se solicitó el pase
+
+    trip_date DATE NOT NULL,            -- Fecha del viaje
+
+    ticket_quantity INTEGER NOT NULL,   -- Cantidad de pasajes
+
+    origin VARCHAR(150) NOT NULL,
+
+    destination VARCHAR(150) NOT NULL,
+
+    reason VARCHAR(255),
+
+    status VARCHAR(50) NOT NULL,        -- FreePassStatus
+
+    created_at TIMESTAMP,
+
+    updated_at TIMESTAMP,
+
+    CONSTRAINT fk_national_free_pass_person
+        FOREIGN KEY (person_id)
+        REFERENCES person(id)
+        ON DELETE CASCADE
 );

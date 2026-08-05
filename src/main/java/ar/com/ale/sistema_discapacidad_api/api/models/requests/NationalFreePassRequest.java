@@ -11,6 +11,8 @@ public class NationalFreePassRequest {
 
     private Long personId;
 
+    private LocalDate requestDate;
+
     private LocalDate tripDate;
 
     private Integer ticketQuantity;

@@ -4,6 +4,7 @@ import ar.com.ale.sistema_discapacidad_api.domain.enums.FreePassStatus;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "fullName",
     "reason",
     "startDate",
+    "requestDate",
     "active",
     "renewals",
     "status",
@@ -35,6 +37,8 @@ public class FreePassResponse {
     private String fullName;
 
     private String reason;
+
+    private LocalDate requestDate;
 
     private Boolean active;
 
