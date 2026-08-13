@@ -51,7 +51,6 @@ public class FreePassRenewalService implements IFreePassRenewalService{
         FreePassRenewalEntity renewal =
                 FreePassRenewalEntity.builder()
                         .year(request.getYear())
-                        .renewalDate(request.getRenewalDate())
                         .renewalDate(
                                 request.getRenewalDate() != null
                                         ? request.getRenewalDate()
