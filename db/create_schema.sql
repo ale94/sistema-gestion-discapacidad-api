@@ -11,7 +11,7 @@ CREATE TABLE person
     date_birth        DATE,
     date_death        DATE,
     tutor             VARCHAR(100),
-    phone             BIGSERIAL,
+    phone             BIGINT,
     gender            VARCHAR(100),
     registration_date DATE
 );
@@ -94,7 +94,7 @@ CREATE TABLE family_member
     full_name    VARCHAR(100),
     dni          BIGINT,
     date_birth   DATE,
-    phone        BIGSERIAL,
+    phone        BIGINT,
     parentage    VARCHAR(100),
     person_id    BIGINT,
     CONSTRAINT fk_family_member_person FOREIGN KEY (person_id) REFERENCES person (id) ON DELETE CASCADE
@@ -110,7 +110,7 @@ CREATE TABLE person_tracking
     dni            BIGINT UNIQUE,
     indicator_type VARCHAR(200),
     address        VARCHAR(100),
-    phone          BIGSERIAL
+    phone          BIGINT
 );
 -- =========================
 -- EVENT
