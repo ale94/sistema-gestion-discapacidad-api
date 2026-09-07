@@ -157,7 +157,7 @@ CREATE TABLE loan
     dni              BIGINT,
     applicant        VARCHAR(150),
     address          VARCHAR(200),
-    phone            BIGSERIAL,
+    phone            BIGINT,
     year             VARCHAR(4),
     request_date     DATE,
     expiration       DATE,
