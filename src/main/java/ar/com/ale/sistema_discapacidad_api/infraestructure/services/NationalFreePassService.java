@@ -54,6 +54,11 @@ public class NationalFreePassService
 
                 NationalFreePassEntity pass = NationalFreePassEntity.builder()
                                 .person(person)
+                                .requestDate(
+                                        request.getRequestDate() != null
+                                                ? request.getRequestDate()
+                                                : java.time.LocalDate.now()
+                                )
                                 .tripDate(request.getTripDate())
                                 .ticketQuantity(request.getTicketQuantity())
                                 .origin(request.getOrigin())
@@ -106,6 +111,7 @@ public class NationalFreePassService
                                                 HttpStatus.NOT_FOUND,
                                                 "Solicitud no encontrada"));
 
+                pass.setRequestDate(request.getRequestDate());
                 pass.setTripDate(request.getTripDate());
                 pass.setTicketQuantity(request.getTicketQuantity());
                 pass.setOrigin(request.getOrigin());
