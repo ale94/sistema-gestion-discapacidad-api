@@ -27,6 +27,8 @@ public class AddressEntity implements Serializable {
     private String district;
     private String locality;
     private String province;
+    private Double latitude;
+    private Double longitude;
 
     @OneToOne
     @JoinColumn(name = "person_id")

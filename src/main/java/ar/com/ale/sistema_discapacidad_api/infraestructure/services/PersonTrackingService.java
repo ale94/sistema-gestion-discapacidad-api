@@ -103,6 +103,8 @@ public class PersonTrackingService implements IPersonTrackingService {
             existingAddress.setDistrict(request.getAddress().getDistrict());
             existingAddress.setLocality(request.getAddress().getLocality());
             existingAddress.setProvince(request.getAddress().getProvince());
+            existingAddress.setLatitude(request.getAddress().getLatitude());
+    		existingAddress.setLongitude(request.getAddress().getLongitude());
             
             //Seteamos la dirección modificada (manteniendo el mismo ID original en base de datos)
             personToUpdate.setAddress(existingAddress);

@@ -58,6 +58,19 @@ CREATE TABLE health
     CONSTRAINT fk_health_person FOREIGN KEY (person_id) REFERENCES person (id) ON DELETE CASCADE
 );
 -- =========================
+-- PERSON TRACKING
+-- =========================
+CREATE TABLE person_tracking
+(
+    id             BIGSERIAL PRIMARY KEY,
+    last_name      VARCHAR(100),
+    first_name     VARCHAR(100),
+    dni            BIGINT UNIQUE,
+    indicator_type VARCHAR(200),
+    -- address        VARCHAR(100),
+    phone          BIGINT
+);
+-- =========================
 -- ADDRESS
 -- =========================
 CREATE TABLE address
@@ -67,8 +80,13 @@ CREATE TABLE address
     district  VARCHAR(100),
     locality  VARCHAR(100),
     province  VARCHAR(100),
+    latitude  DOUBLE PRECISION,
+    longitude DOUBLE PRECISION,
     person_id BIGINT UNIQUE,
-    CONSTRAINT fk_address_person FOREIGN KEY (person_id) REFERENCES person (id) ON DELETE CASCADE
+    person_tracking_id BIGINT UNIQUE,
+    CONSTRAINT fk_address_person FOREIGN KEY (person_id) REFERENCES person (id) ON DELETE CASCADE,
+    CONSTRAINT fk_address_person_tracking FOREIGN KEY (person_tracking_id) 
+        REFERENCES person_tracking (id) ON DELETE CASCADE
 );
 -- =========================
 -- BENEFIT
@@ -99,19 +117,7 @@ CREATE TABLE family_member
     person_id    BIGINT,
     CONSTRAINT fk_family_member_person FOREIGN KEY (person_id) REFERENCES person (id) ON DELETE CASCADE
 );
--- =========================
--- PERSON TRACKING
--- =========================
-CREATE TABLE person_tracking
-(
-    id             BIGSERIAL PRIMARY KEY,
-    last_name      VARCHAR(100),
-    first_name     VARCHAR(100),
-    dni            BIGINT UNIQUE,
-    indicator_type VARCHAR(200),
-    address        VARCHAR(100),
-    phone          BIGINT
-);
+
 -- =========================
 -- EVENT
 -- =========================

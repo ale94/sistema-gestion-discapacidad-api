@@ -17,5 +17,7 @@ public class AddressRequest implements Serializable {
     private String district;
     private String locality;
     private String province;
+    private Double latitude;
+    private Double longitude;
 
 }
