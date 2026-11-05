@@ -127,6 +127,8 @@ public class PersonService implements IPersonService {
 			address.setDistrict(request.getAddress().getDistrict());
 			address.setLocality(request.getAddress().getLocality());
 			address.setProvince(request.getAddress().getProvince());
+			address.setLatitude(request.getAddress().getLatitude());
+    		address.setLongitude(request.getAddress().getLongitude());
 			personToUpdate.setAddress(address);
 		}
 
