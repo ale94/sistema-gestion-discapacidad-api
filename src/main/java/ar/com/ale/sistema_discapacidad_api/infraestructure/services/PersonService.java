@@ -270,9 +270,28 @@ public class PersonService implements IPersonService {
 
 	@Override
 	public List<PersonResponse> readAll() {
+		// Usamos Locale.of() en lugar del constructor deprecado (disponible desde Java 19)
+		java.text.Collator collator = java.text.Collator.getInstance(java.util.Locale.of("es", "ES"));
+		collator.setStrength(java.text.Collator.PRIMARY);
+
 		return this.personRepository.findAll()
 				.stream()
 				.map(personMapper::toResponse)
+				.sorted((p1, p2) -> {
+					String lastName1 = p1.getLastName() != null ? p1.getLastName() : "";
+					String lastName2 = p2.getLastName() != null ? p2.getLastName() : "";
+
+					int lastNameResult = collator.compare(lastName1, lastName2);
+					
+					if (lastNameResult != 0) {
+						return lastNameResult;
+					}
+
+					String firstName1 = p1.getFirstName() != null ? p1.getFirstName() : "";
+					String firstName2 = p2.getFirstName() != null ? p2.getFirstName() : "";
+
+					return collator.compare(firstName1, firstName2);
+				})
 				.collect(Collectors.toList());
 	}
 
